@@ -7,6 +7,7 @@ public class Customer {
     private int customerId;
     private String customerName;
     private String customerEmailAddress;
+    private String customerFirstLineAddress;
     private String customerPostCode;
     private String customerPhone;
 
@@ -23,6 +24,14 @@ public class Customer {
     public String getCustomerEmailAddress() { return customerEmailAddress; }
 
     public void setCustomerEmailAddress(String customerEmailAddress) { this.customerEmailAddress = customerEmailAddress; }
+
+    public String getCustomerFirstLineAddress() {
+        return customerFirstLineAddress;
+    }
+
+    public void setCustomerFirstLineAddress(String customerFirstLineAddress) {
+        this.customerFirstLineAddress = customerFirstLineAddress;
+    }
 
     public String getCustomerPostCode() { return customerPostCode; }
 

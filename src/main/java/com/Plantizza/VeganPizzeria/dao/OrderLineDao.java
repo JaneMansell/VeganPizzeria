@@ -1,4 +1,4 @@
 package com.Plantizza.VeganPizzeria.dao;
 
-public interface OrderLinesDao {
+public interface OrderLineDao {
 }

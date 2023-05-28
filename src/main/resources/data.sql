@@ -18,10 +18,10 @@ INSERT INTO pizzas VALUES
 ('Olive and sundried tomato', 8.99);
 
 INSERT INTO employees VALUES
-(1, 'Leo', 'DaVinci', 'leo@veganpizzeria.com'),
-(2, 'Micky', 'Angelo', 'micky@veganpizzeria.com'),
-(3, 'Donna', 'Tello', 'donna@veganpizzeria.com'),
-(4, 'Raph', 'Ale', 'raph@veganpizzeria.com');
+(1, 'Leo', 'DaVinci', 'leo@plantizza.com'),
+(2, 'Micky', 'Angelo', 'micky@plantizza.com'),
+(3, 'Donna', 'Tello', 'donna@vplantizza.com'),
+(4, 'Raph', 'Ale', 'raph@plantizza.com');
 
 INSERT INTO orders VALUES
 (1, 2, '17:30:05', '2023-05-26', 6.99, 'Delivered'),
