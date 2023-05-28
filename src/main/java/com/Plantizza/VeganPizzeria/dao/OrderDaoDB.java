@@ -2,9 +2,11 @@ package com.Plantizza.VeganPizzeria.dao;
 
 import com.Plantizza.VeganPizzeria.entities.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,27 +22,64 @@ public class OrderDaoDB implements OrderDao {
 
     @Override
     public Order getOrderByID(int id) {
-        return null;
+        try{
+            final String GET_ORDER_BY_ID = "SELECT * FROM orders WHERE orderId = ?";
+            return jdbc.queryForObject(GET_ORDER_BY_ID, new OrderMapper(), id);
+        } catch(DataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public List<Order> getAllOrders() {
-        return null;
+        final String GET_ALL_ORDERS = "SELECT * FROM orders";
+        return jdbc.query(GET_ALL_ORDERS, new OrderMapper());
     }
 
     @Override
+    @Transactional
     public Order addOrder(Order order) {
-        return null;
+        final String INSERT_ORDER ="INSERT INTO orders(" +
+                "customerId,orderPlacedTime, orderDate," +
+                "total, orderStatus) VALUES (?,?,?,?,?)";
+        jdbc.update(INSERT_ORDER,
+                order.getCustomerId(),
+                order.getOrderPlacedTime().toString(),
+                order.getOrderDate().toString(),
+                order.getTotal(),
+                order.getOrderStatus());
+
+        int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        order.setId(newId);
+
+        return order;
     }
 
     @Override
     public void updateOrder(Order order) {
+        final String UPDATE_ORDER = "UPDATE orders SET customerId = ?, " +
+                "orderPlacedTime =?, orderDate = ?, total =?, orderStatus = ?" +
+                "WHERE orderId = ?";
+        jdbc.update(UPDATE_ORDER,
+
+                order.getOrderPlacedTime().toString(),
+                order.getOrderDate().toString(),
+                order.getTotal(),
+                order.getOrderStatus(),
+                order.getCustomerId());
 
     }
 
     @Override
+    @Transactional
     public void deleteOrderById(int id) {
-
+        //Delete order line items first
+        final String DELETE_ORDER_LINES = "DELETE FROM orderLines " +
+                "WHERE orderId = ?";
+        jdbc.update(DELETE_ORDER_LINES,id);
+        //Then delete order
+        final String DELETE_ORDER ="DELETE FROM orders WHERE orderId = ?";
+        jdbc.update(DELETE_ORDER,id);
     }
 
     public static final class OrderMapper implements RowMapper<Order>{
