@@ -6,6 +6,7 @@ USE veganPizzeria;
 CREATE TABLE customers(
 customerId INT PRIMARY KEY AUTO_INCREMENT,
 customerName VARCHAR(50) NOT NULL,
+customerEmailAddress VARCHAR(50) NOT NULL,
 customerFirstLineAddress VARCHAR(100) NOT NULL,
 customerPostCode VARCHAR(10) NOT NULL, 
 customerPhone VARCHAR(50) NOT NULL
@@ -44,3 +45,9 @@ firstName  VARCHAR(20) NOT NULL,
 secondName  VARCHAR(20) NOT NULL,
 emailAddress  VARCHAR(50) NOT NULL
 );
+
+CREATE TABLE login(
+emailAddress VARCHAR(50) PRIMARY KEY,
+password VARCHAR(50) NOT NULL,
+userType VARCHAR(20) NOT NULL
+)
