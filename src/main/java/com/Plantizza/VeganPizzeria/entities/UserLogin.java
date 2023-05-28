@@ -2,7 +2,7 @@ package com.Plantizza.VeganPizzeria.entities;
 
 import java.util.Objects;
 
-public class Login {
+public class UserLogin {
     private String emailAddress;
     private String password;
     private String userType;
@@ -35,8 +35,8 @@ public class Login {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Login login = (Login) o;
-        return Objects.equals(emailAddress, login.emailAddress) && Objects.equals(password, login.password) && Objects.equals(userType, login.userType);
+        UserLogin userLogin = (UserLogin) o;
+        return Objects.equals(emailAddress, userLogin.emailAddress) && Objects.equals(password, userLogin.password) && Objects.equals(userType, userLogin.userType);
     }
 
     @Override
