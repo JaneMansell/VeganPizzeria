@@ -7,7 +7,7 @@ INSERT INTO customers VALUES
 (4,'Mark Selby', 'mark@plusnet.com','1 Ally Pally Street', 'PO32 6JL', '07777122222'),
 (5,'Jimmy White', 'jimmy@gmail.com','3 Ally Pally Street', 'PO32 6JW', '07777123333'),
 (6,'Dominic Dale', 'dom@gmail.com','5 Ally Pally Street', 'PO32 6JK', '07777123444'),
-(7,'Yan Bingtao', 'yan@@btinternet.com','7 Ally Pally Street', 'PO32 6JW', '07777123455'),
+(7,'Yan Bingtao', 'yan@btinternet.com','7 Ally Pally Street', 'PO32 6JW', '07777123455'),
 (8,'Marco Fu', 'marco@gmail.com','9 Ally Pally Street', 'PO32 6JW', '07777222222');
 
 INSERT INTO pizzas VALUES
