@@ -8,4 +8,7 @@ import java.sql.SQLException;
 
 public interface CustomerDao {
 
+    Customer getCustomerById(int customerId);
+
+    Customer addCustomer(Customer customer);
 }
