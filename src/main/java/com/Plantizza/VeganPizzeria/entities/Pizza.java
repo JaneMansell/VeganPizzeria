@@ -3,7 +3,7 @@ package com.Plantizza.VeganPizzeria.entities;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Pizzas {
+public class Pizza {
     private String pizzaName;
     private BigDecimal pizzaPrice;
 
@@ -18,8 +18,8 @@ public class Pizzas {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Pizzas pizzas)) return false;
-        return Objects.equals(pizzaName, pizzas.pizzaName) && Objects.equals(pizzaPrice, pizzas.pizzaPrice);
+        if (!(o instanceof Pizza pizza)) return false;
+        return Objects.equals(pizzaName, pizza.pizzaName) && Objects.equals(pizzaPrice, pizza.pizzaPrice);
     }
 
     @Override

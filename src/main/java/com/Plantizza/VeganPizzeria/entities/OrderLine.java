@@ -2,7 +2,7 @@ package com.Plantizza.VeganPizzeria.entities;
 
 import java.util.Objects;
 
-public class OrderLines {
+public class OrderLine {
 
     private int lineOrderId;
     private int orderId;
@@ -28,7 +28,7 @@ public class OrderLines {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderLines that)) return false;
+        if (!(o instanceof OrderLine that)) return false;
         return lineOrderId == that.lineOrderId && orderId == that.orderId && quantity == that.quantity && Objects.equals(pizzaName, that.pizzaName);
     }
 

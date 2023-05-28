@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class Orders {
+public class Order {
     private int id;
     private int customerId;
     private LocalTime orderPlacedTime;
@@ -65,8 +65,8 @@ public class Orders {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Orders orders = (Orders) o;
-        return id == orders.id && customerId == orders.customerId && Objects.equals(orderPlacedTime, orders.orderPlacedTime) && Objects.equals(orderDate, orders.orderDate) && Objects.equals(total, orders.total) && Objects.equals(orderStatus, orders.orderStatus);
+        Order order = (Order) o;
+        return id == order.id && customerId == order.customerId && Objects.equals(orderPlacedTime, order.orderPlacedTime) && Objects.equals(orderDate, order.orderDate) && Objects.equals(total, order.total) && Objects.equals(orderStatus, order.orderStatus);
     }
 
     @Override

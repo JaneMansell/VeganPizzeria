@@ -2,7 +2,7 @@ package com.Plantizza.VeganPizzeria.entities;
 
 import java.util.Objects;
 
-public class Employees {
+public class Employee {
     private int id;
     private String firstName;
     private String secondName;
@@ -44,8 +44,8 @@ public class Employees {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employees employees = (Employees) o;
-        return id == employees.id && Objects.equals(firstName, employees.firstName) && Objects.equals(secondName, employees.secondName) && Objects.equals(emailAddress, employees.emailAddress);
+        Employee employee = (Employee) o;
+        return id == employee.id && Objects.equals(firstName, employee.firstName) && Objects.equals(secondName, employee.secondName) && Objects.equals(emailAddress, employee.emailAddress);
     }
 
     @Override
