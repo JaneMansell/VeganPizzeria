@@ -10,8 +10,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -41,27 +44,24 @@ public class OrderLineDaoDB implements OrderLineDao {
     }
 
     @Override
-    public List<OrderLine> getAllOrderLines() {
-        final String SELECT_ALL_ORDER_LINES = "SELECT * FROM orderLines";
-        List<OrderLine> orderLines = jdbc.query(SELECT_ALL_ORDER_LINES, new OrderLineMapper());
+    public List<OrderLine> getOrderLinesByCustomerId(int customerId) {
+        final String SELECT_ORDER_LINES_BY_CUSTOMER_ID = "SELECT * FROM orderLines WHERE orderId IN " +
+                "(SELECT orderId FROM orders WHERE customerId = ?)";
+        List<OrderLine> orderLines = jdbc.query(SELECT_ORDER_LINES_BY_CUSTOMER_ID, new OrderLineMapper(), customerId);
         return orderLines;
     }
 
     @Override
-    public OrderLine addOrderLine(OrderLine orderLine) {
-        final String INSERT_ORDER_LINE = "INSERT INTO orderLines(pizzaName, quantity) VALUES(?,?,?,?)";
+    public OrderLine addOrderLine(OrderLine orderLine, int orderId) {
+        final String INSERT_ORDER_LINE = "INSERT INTO orderLines(orderId, pizzaName, quantity) VALUES(?,?,?)";
         jdbc.update(INSERT_ORDER_LINE,
-                orderLine.getLineOrderId(),
                 orderLine.getOrderId(),
                 orderLine.getPizzaName(),
                 orderLine.getQuantity());
 
-        // need to think about setting orderID correctly... grab max value from orders table?
-        // But need to make sure that one order "transaction" has same orderId.
-        /*int newLineOrderId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        int newOrderId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        int newLineOrderId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         orderLine.setLineOrderId(newLineOrderId);
-        orderLine.setOrderId(newOrderId);*/
+        orderLine.setOrderId(orderId);
 
         return orderLine;
     }
