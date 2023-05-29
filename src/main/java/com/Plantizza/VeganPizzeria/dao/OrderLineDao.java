@@ -16,5 +16,5 @@ public interface OrderLineDao {
 
     void updateOrderLine(OrderLine orderLine);
 
-    void deleteOrderLineByLineOrderId(int lineOrderId);
+    void deleteOrderLine(int lineOrderId);
 }
