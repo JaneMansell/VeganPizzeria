@@ -67,7 +67,7 @@ public class OrderDaoDBTest {
         order.setOrderStatus("Cooking");
         order = orderdao.addOrder(order);
 
-        Order fromDao = orderdao.getOrderByID(order.getId());
+        Order fromDao = orderdao.getOrderById(order.getId());
 
         assertEquals(order, fromDao);
     }
@@ -107,31 +107,31 @@ public class OrderDaoDBTest {
         order.setOrderStatus("Cooking");
         order = orderdao.addOrder(order);
 
-        Order fromDao = orderdao.getOrderByID(order.getId());
+        Order fromDao = orderdao.getOrderById(order.getId());
         assertEquals(order, fromDao);
         //Test 1
         order.setOrderPlacedTime(LocalTime.parse("19:07:20"));
         orderdao.updateOrder(order);
         assertNotEquals(order, fromDao);
-        fromDao = orderdao.getOrderByID(order.getId());
+        fromDao = orderdao.getOrderById(order.getId());
         assertEquals(order,fromDao);
         //Test 2
         order.setOrderDate(LocalDate.parse("2023-05-30"));
         orderdao.updateOrder(order);
         assertNotEquals(order, fromDao);
-        fromDao = orderdao.getOrderByID(order.getId());
+        fromDao = orderdao.getOrderById(order.getId());
         assertEquals(order,fromDao);
         //Test 3
         order.setTotal(BigDecimal.valueOf(35.99));
         orderdao.updateOrder(order);
         assertNotEquals(order, fromDao);
-        fromDao = orderdao.getOrderByID(order.getId());
+        fromDao = orderdao.getOrderById(order.getId());
         assertEquals(order,fromDao);
         //Test 1
         order.setOrderStatus("Delivered");
         orderdao.updateOrder(order);
         assertNotEquals(order, fromDao);
-        fromDao = orderdao.getOrderByID(order.getId());
+        fromDao = orderdao.getOrderById(order.getId());
         assertEquals(order,fromDao);
     }
 }
