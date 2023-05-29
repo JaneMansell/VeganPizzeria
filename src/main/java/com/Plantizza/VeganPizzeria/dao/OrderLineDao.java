@@ -10,9 +10,9 @@ public interface OrderLineDao {
 
     OrderLine getOrderLineByOrderId(int orderId);
 
-    List<OrderLine> getAllOrderLines();
+    List<OrderLine> getOrderLinesByCustomerId(int customerId);
 
-    OrderLine addOrderLine(OrderLine orderLine);
+    OrderLine addOrderLine(OrderLine orderLine, int orderId);
 
     void updateOrderLine(OrderLine orderLine);
 
