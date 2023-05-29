@@ -68,7 +68,6 @@ public class OrderDaoDBTest {
         order = orderdao.addOrder(order);
 
         Order fromDao = orderdao.getOrderByID(order.getId());
-        System.out.println("Is this the time: " + fromDao.getOrderPlacedTime());
 
         assertEquals(order, fromDao);
     }
@@ -96,5 +95,43 @@ public class OrderDaoDBTest {
         assertEquals(2, orders.size());
         assertTrue(orders.contains(order));
         assertTrue(orders.contains(order2));
+    }
+
+    @Test
+    public void testUpdateOrder() {
+        Order order = new Order();
+        order.setCustomerId(1);
+        order.setOrderPlacedTime(LocalTime.parse("17:07:20"));
+        order.setOrderDate(LocalDate.parse("2023-05-29"));
+        order.setTotal(BigDecimal.valueOf(18.99));
+        order.setOrderStatus("Cooking");
+        order = orderdao.addOrder(order);
+
+        Order fromDao = orderdao.getOrderByID(order.getId());
+        assertEquals(order, fromDao);
+        //Test 1
+        order.setOrderPlacedTime(LocalTime.parse("19:07:20"));
+        orderdao.updateOrder(order);
+        assertNotEquals(order, fromDao);
+        fromDao = orderdao.getOrderByID(order.getId());
+        assertEquals(order,fromDao);
+        //Test 2
+        order.setOrderDate(LocalDate.parse("2023-05-30"));
+        orderdao.updateOrder(order);
+        assertNotEquals(order, fromDao);
+        fromDao = orderdao.getOrderByID(order.getId());
+        assertEquals(order,fromDao);
+        //Test 3
+        order.setTotal(BigDecimal.valueOf(35.99));
+        orderdao.updateOrder(order);
+        assertNotEquals(order, fromDao);
+        fromDao = orderdao.getOrderByID(order.getId());
+        assertEquals(order,fromDao);
+        //Test 1
+        order.setOrderStatus("Delivered");
+        orderdao.updateOrder(order);
+        assertNotEquals(order, fromDao);
+        fromDao = orderdao.getOrderByID(order.getId());
+        assertEquals(order,fromDao);
     }
 }
