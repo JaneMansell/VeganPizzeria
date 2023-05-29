@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,9 +76,9 @@ public class OrderLineDaoDB implements OrderLineDao {
     }
 
     @Override
-    public void deleteOrderLineByLineOrderId(int lineOrderId) {
+    public void deleteOrderLine(int lineOrderId) {
     final String DELETE_ORDER_LINE = "DELETE FROM orderLines WHERE lineOrderId = ?";
-    jdbc.update(DELETE_ORDER_LINE, new OrderLineMapper(), lineOrderId);
+    jdbc.update(DELETE_ORDER_LINE, lineOrderId);
     }
 
     public static final class OrderLineMapper implements RowMapper<OrderLine> {

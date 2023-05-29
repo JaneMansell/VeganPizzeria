@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -74,6 +75,12 @@ public class OrderLineController {
         // Add the OrderLine to the database
         orderLineDao.addOrderLine(orderLine, orderId);
 
+        return "redirect:/placeOrder";
+    }
+
+    @GetMapping("/deleteOrderLine")
+    public String deleteOrderLine(@RequestParam("id") Integer lineOrderId) {
+        orderLineDao.deleteOrderLine(lineOrderId);
         return "redirect:/placeOrder";
     }
 
