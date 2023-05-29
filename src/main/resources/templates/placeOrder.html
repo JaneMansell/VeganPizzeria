@@ -61,14 +61,14 @@
                     <th>Pizza</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Delete</th>
+                    <th> </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="orderLine : ${orderLines}">
                     <td th:text="${orderLine.pizzaName}">Pizza</td>
                     <td th:text='${orderLine.quantity}'>Quantity</td>
-                    <td th:text='${orderLine.lineCost}'>Price</td>
+                    <td th:text="'£' + ${orderLine.lineCost}">Price</td>
                     <td><a href="#" th:href="@{/deleteOrderLine(id=${orderLine.lineOrderId})}">Delete</a></td>
                 </tr>
                 </tbody>
@@ -78,11 +78,33 @@
 
     <div class="row m-4">
         <div class="col text-center">
-            <form action="/submitOrder" method="POST">
-                <button type="submit" class="btn btn-primary">Submit Order</button>
+            <form id="submitOrderForm" action="/submitOrder" method="POST">
+                <button id="submitOrderButton" type="submit" class="btn btn-primary">Submit Order</button>
+                <span id="orderStatusText"></span>
             </form>
         </div>
     </div>
+
+    <script>
+    const submitOrderForm = document.getElementById('submitOrderForm');
+    const submitOrderButton = document.getElementById('submitOrderButton');
+    const orderStatusText = document.getElementById('orderStatusText');
+    const orderDetails = document.getElementById('orderDetails');
+
+    submitOrderForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Disable the submit button
+        submitOrderButton.disabled = true;
+
+        // Update the order status text
+        orderStatusText.textContent = 'Order Submitted';
+
+        // Show the order details
+        orderDetails.style.display = 'block';
+    });
+</script>
+
 </div>
 
 <!-- Optional JavaScript -->

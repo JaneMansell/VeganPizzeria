@@ -2,6 +2,7 @@ package com.Plantizza.VeganPizzeria.dao;
 
 import com.Plantizza.VeganPizzeria.entities.Order;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,5 +12,6 @@ public interface OrderDao {
     List<Order> getAllOrdersByCustomerIdByDate(int cid, LocalDate date);
     Order addOrder(Order order);
     void updateOrder(Order order);
+    BigDecimal calculateOrderTotal(int id);
     void deleteOrderById(int id);
 }

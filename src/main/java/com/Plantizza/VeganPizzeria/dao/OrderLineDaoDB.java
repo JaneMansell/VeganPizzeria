@@ -59,6 +59,7 @@ public class OrderLineDaoDB implements OrderLineDao {
     }
 
     @Override
+    @Transactional
     public OrderLine addOrderLine(OrderLine orderLine, int orderId) {
         final String INSERT_ORDER_LINE = "INSERT INTO orderLines(orderId, pizzaName, quantity, lineCost) VALUES(?,?,?,?)";
         jdbc.update(INSERT_ORDER_LINE,
@@ -72,19 +73,6 @@ public class OrderLineDaoDB implements OrderLineDao {
         orderLine.setOrderId(orderId);
 
         return orderLine;
-    }
-
-    public BigDecimal getCostOfOrderLine(Integer lineOrderId) {
-        final String GET_TOTAL_COST = "SELECT p.pizzaPrice * ol.quantity " +
-                "FROM pizzas p " +
-                "INNER JOIN orderLines ol ON p.pizzaName = ol.pizzaName " +
-                "WHERE ol.lineOrderId = ?";
-
-        try {
-            return jdbc.queryForObject(GET_TOTAL_COST, new Object[]{lineOrderId}, BigDecimal.class);
-        } catch (EmptyResultDataAccessException e) {
-            return null; // or handle the exception accordingly
-        }
     }
 
     @Override

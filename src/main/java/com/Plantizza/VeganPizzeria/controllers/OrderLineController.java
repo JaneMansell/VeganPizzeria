@@ -35,12 +35,14 @@ public class OrderLineController {
     @Autowired
     PizzaDao pizzaDao;
 
-    int customerId = 1;
+    int customerId = 4;
+    int orderId = 6;
 
     @GetMapping("placeOrder")
     public String displayOrderLines(Model model) {
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByCustomerId(this.customerId);
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
+        Order order = orderDao.getOrderByID(this.orderId);
 
         model.addAttribute("orderLines", orderLines);
         model.addAttribute("pizzas", pizzas);
@@ -87,6 +89,19 @@ public class OrderLineController {
     @GetMapping("/deleteOrderLine")
     public String deleteOrderLine(@RequestParam("id") Integer lineOrderId) {
         orderLineDao.deleteOrderLine(lineOrderId);
+        return "redirect:/placeOrder";
+    }
+
+    @PostMapping("/submitOrder")
+    public String submitOrder(Order order, Model model){
+        BigDecimal orderTotal = orderDao.calculateOrderTotal(order.getId());
+        order.setTotal(orderTotal);
+        order.setOrderStatus("Ordered");
+        order.setOrderPlacedTime(LocalTime.now());
+        order.setOrderDate(LocalDate.now());
+
+        orderDao.updateOrder(order);
+
         return "redirect:/placeOrder";
     }
 
