@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,6 +21,12 @@ public class PizzaDaoDB implements PizzaDao {
     public Pizza getPizzaByName(String pizzaName) {
         final String GET_PIZZA_BY_NAME = "SELECT * FROM pizzas WHERE pizzaName = ?";
         return jdbc.queryForObject(GET_PIZZA_BY_NAME, new PizzaMapper(), pizzaName);
+    }
+
+    @Override
+    public BigDecimal getPizzaPriceByName(String pizzaName) {
+        final String GET_PIZZA_PRICE_BY_NAME = "SELECT * FROM pizzas WHERE pizzaName = ?";
+        return jdbc.queryForObject(GET_PIZZA_PRICE_BY_NAME, new PizzaMapper(), pizzaName).getPizzaPrice();
     }
 
     @Override
