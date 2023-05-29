@@ -66,16 +66,15 @@ public class OrderDaoDB implements OrderDao {
     @Override
     public void updateOrder(Order order) {
         final String UPDATE_ORDER = "UPDATE orders SET customerId = ?, " +
-                "orderPlacedTime =?, orderDate = ?, total =?, orderStatus = ?" +
+                "orderPlacedTime =?, orderDate = ?, total =?, orderStatus = ? " +
                 "WHERE orderId = ?";
         jdbc.update(UPDATE_ORDER,
-
+                order.getCustomerId(),
                 order.getOrderPlacedTime().toString(),
                 order.getOrderDate().toString(),
                 order.getTotal(),
                 order.getOrderStatus(),
-                order.getCustomerId());
-
+                order.getId());
     }
 
     @Override
