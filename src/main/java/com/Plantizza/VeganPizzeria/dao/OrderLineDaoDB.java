@@ -5,6 +5,7 @@ import com.Plantizza.VeganPizzeria.entities.OrderLine;
 import com.Plantizza.VeganPizzeria.entities.Pizza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,9 @@ public class OrderLineDaoDB implements OrderLineDao {
 
     @Autowired
     JdbcTemplate jdbc;
+
+    @Autowired
+    PizzaDaoDB pizzaDao;
 
     @Override
     public OrderLine getOrderLineByLineOrderId(int lineOrderId) {
@@ -46,25 +50,41 @@ public class OrderLineDaoDB implements OrderLineDao {
 
     @Override
     public List<OrderLine> getOrderLinesByCustomerId(int customerId) {
-        final String SELECT_ORDER_LINES_BY_CUSTOMER_ID = "SELECT * FROM orderLines WHERE orderId IN " +
-                "(SELECT orderId FROM orders WHERE customerId = ?)";
+        final String SELECT_ORDER_LINES_BY_CUSTOMER_ID = "SELECT ol.* " +
+                "FROM orderLines ol " +
+                "INNER JOIN orders o ON ol.orderId = o.orderId " +
+                "WHERE o.customerId = ?";
         List<OrderLine> orderLines = jdbc.query(SELECT_ORDER_LINES_BY_CUSTOMER_ID, new OrderLineMapper(), customerId);
         return orderLines;
     }
 
     @Override
     public OrderLine addOrderLine(OrderLine orderLine, int orderId) {
-        final String INSERT_ORDER_LINE = "INSERT INTO orderLines(orderId, pizzaName, quantity) VALUES(?,?,?)";
+        final String INSERT_ORDER_LINE = "INSERT INTO orderLines(orderId, pizzaName, quantity, lineCost) VALUES(?,?,?,?)";
         jdbc.update(INSERT_ORDER_LINE,
                 orderLine.getOrderId(),
                 orderLine.getPizzaName(),
-                orderLine.getQuantity());
+                orderLine.getQuantity(),
+                orderLine.getLineCost());
 
         int newLineOrderId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         orderLine.setLineOrderId(newLineOrderId);
         orderLine.setOrderId(orderId);
 
         return orderLine;
+    }
+
+    public BigDecimal getCostOfOrderLine(Integer lineOrderId) {
+        final String GET_TOTAL_COST = "SELECT p.pizzaPrice * ol.quantity " +
+                "FROM pizzas p " +
+                "INNER JOIN orderLines ol ON p.pizzaName = ol.pizzaName " +
+                "WHERE ol.lineOrderId = ?";
+
+        try {
+            return jdbc.queryForObject(GET_TOTAL_COST, new Object[]{lineOrderId}, BigDecimal.class);
+        } catch (EmptyResultDataAccessException e) {
+            return null; // or handle the exception accordingly
+        }
     }
 
     @Override
@@ -89,7 +109,7 @@ public class OrderLineDaoDB implements OrderLineDao {
             orderLine.setOrderId(rs.getInt("orderId"));
             orderLine.setPizzaName(rs.getString("pizzaName"));
             orderLine.setQuantity(rs.getInt("quantity"));
-
+            orderLine.setLineCost(rs.getBigDecimal("lineCost"));
             return orderLine;
         }
     }

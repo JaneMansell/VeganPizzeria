@@ -29,7 +29,7 @@
             <span class="h3">Add Pizza</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="placeOrder" method="POST">
+            <form action="/addOrderLine" method="POST">
                 <div class="form-group row">
                     <label for="pizza" class="col-3 col-form-label">Pizza</label>
                     <div class="col-9">
@@ -45,7 +45,7 @@
                 <div class="form-group row">
                     <label for="quantity" class="col-3 col-form-label">Quantity</label>
                     <div class="col-9">
-                        <input type="number" name="quantity" id="quantity" class="form-control" min="0" />
+                        <input type="number" name="quantity" id="quantity" class="form-control" min="1" />
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Add To Order</button>
@@ -60,6 +60,7 @@
                 <tr>
                     <th>Pizza</th>
                     <th>Quantity</th>
+                    <th>Price</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
@@ -67,10 +68,19 @@
                 <tr th:each="orderLine : ${orderLines}">
                     <td th:text="${orderLine.pizzaName}">Pizza</td>
                     <td th:text='${orderLine.quantity}'>Quantity</td>
+                    <td th:text='${orderLine.lineCost}'>Price</td>
                     <td><a href="#" th:href="@{/deleteOrderLine(id=${orderLine.lineOrderId})}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="row m-4">
+        <div class="col text-center">
+            <form action="/submitOrder" method="POST">
+                <button type="submit" class="btn btn-primary">Submit Order</button>
+            </form>
         </div>
     </div>
 </div>

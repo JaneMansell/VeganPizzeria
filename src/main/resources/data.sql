@@ -5,7 +5,7 @@ INSERT INTO pizzas VALUES
 ('BBQ Jackfruit', 8.99),
 ('Mushroom', 8.99),
 ('Roasted Veg', 8.99),
-('Olive and sundried tomato', 8.99);
+('Olive and Sundried Tomato', 8.99);
 
 INSERT INTO statusOfOrder VALUES
 ('Basket'),
@@ -59,15 +59,15 @@ INSERT INTO orders VALUES
 (5, 8, '18:10:05', '2023-05-26', 17.98, 'Ordered');
 
 INSERT INTO orderLines VALUES
-(1,1,'Plain',1),
-(2,2,'Plain',1),
-(3,2,'Mushroom',1),
-(4,3,'Plain',1),
-(5,3,'Mushroom',1),
-(6,3,'Roasted Veg',1),
-(7,4,'Plain',2),
-(8,5,'BBQ Jackfruit',1),
-(9,5,'Olive and sundried tomato',1);
+(1,1,'Plain',1,6.99),
+(2,2,'Plain',1,6.99),
+(3,2,'Mushroom',1,8.99),
+(4,3,'Plain',1,6.99),
+(5,3,'Mushroom',1,8.99),
+(6,3,'Roasted Veg',1,8.99),
+(7,4,'Plain',2,13.98),
+(8,5,'BBQ Jackfruit',1,8.99),
+(9,5,'Olive and Sundried Tomato',1,8.99);
 
 
 
