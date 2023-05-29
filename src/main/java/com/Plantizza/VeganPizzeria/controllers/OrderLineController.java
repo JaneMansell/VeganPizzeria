@@ -35,23 +35,24 @@ public class OrderLineController {
     @Autowired
     PizzaDao pizzaDao;
 
+    int customerId = 1;
+
     @GetMapping("placeOrder")
     public String displayOrderLines(Model model) {
-        List<OrderLine> orderLines = orderLineDao.getOrderLinesByCustomerId(4);
+        List<OrderLine> orderLines = orderLineDao.getOrderLinesByCustomerId(this.customerId);
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
+
         model.addAttribute("orderLines", orderLines);
         model.addAttribute("pizzas", pizzas);
         return "placeOrder";
     }
 
-    @PostMapping("placeOrder")
+    @PostMapping("/addOrderLine")
     public String addOrderLine(OrderLine orderLine, HttpServletRequest request) {
-        // Get the customerId (replace with the actual customer ID in the future)
-        int customerId = 4;
 
         // Create the Order
         Order order = new Order();
-        order.setCustomerId(customerId);
+        order.setCustomerId(this.customerId);
         order.setOrderPlacedTime(LocalTime.now());
         order.setOrderDate(LocalDate.now());
         order.setOrderStatus("Basket");
@@ -68,9 +69,14 @@ public class OrderLineController {
         String pizzaName = request.getParameter("pizzaName");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
+        // Calculate cost of orderLine
+        BigDecimal pizzaCost = pizzaDao.getPizzaPriceByName(pizzaName);
+        BigDecimal lineCost = pizzaCost.multiply(BigDecimal.valueOf(quantity));
+
         // Set the remaining properties of the OrderLine
         orderLine.setPizzaName(pizzaName);
         orderLine.setQuantity(quantity);
+        orderLine.setLineCost(lineCost);
 
         // Add the OrderLine to the database
         orderLineDao.addOrderLine(orderLine, orderId);
