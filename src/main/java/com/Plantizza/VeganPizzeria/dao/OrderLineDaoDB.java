@@ -1,5 +1,6 @@
 package com.Plantizza.VeganPizzeria.dao;
 
+import com.Plantizza.VeganPizzeria.entities.Order;
 import com.Plantizza.VeganPizzeria.entities.OrderLine;
 import com.Plantizza.VeganPizzeria.entities.Pizza;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class OrderLineDaoDB implements OrderLineDao {
@@ -36,6 +38,13 @@ public class OrderLineDaoDB implements OrderLineDao {
         } catch (DataAccessException ex) {
             return null;
         }
+    }
+
+    @Override
+    public List<OrderLine> getAllOrderLines() {
+        final String SELECT_ALL_ORDER_LINES = "SELECT * FROM orderLines";
+        List<OrderLine> orderLines = jdbc.query(SELECT_ALL_ORDER_LINES, new OrderLineMapper());
+        return orderLines;
     }
 
     @Override
