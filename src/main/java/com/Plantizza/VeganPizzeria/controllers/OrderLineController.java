@@ -42,7 +42,6 @@ public class OrderLineController {
     public String displayOrderLines(Model model) {
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByCustomerId(this.customerId);
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
-        Order order = orderDao.getOrderByID(this.orderId);
 
         model.addAttribute("orderLines", orderLines);
         model.addAttribute("pizzas", pizzas);
@@ -53,19 +52,13 @@ public class OrderLineController {
     public String addOrderLine(OrderLine orderLine, HttpServletRequest request) {
 
         // Create the Order
-        Order order = new Order();
-        order.setCustomerId(this.customerId);
-        order.setOrderPlacedTime(LocalTime.now());
-        order.setOrderDate(LocalDate.now());
-        order.setOrderStatus("Basket");
-        order.setTotal(new BigDecimal(0.00));
+        Order order = orderDao.createBlankOrder(this.customerId);
 
         // Persist the Order
         order = orderDao.addOrder(order);
-        int orderId = order.getId();
 
         // Set the orderId for the OrderLine
-        orderLine.setOrderId(orderId);
+        orderLine.setOrderId(order.getId());
 
         // Retrieve other form parameters
         String pizzaName = request.getParameter("pizzaName");

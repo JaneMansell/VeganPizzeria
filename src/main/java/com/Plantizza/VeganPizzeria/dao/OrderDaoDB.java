@@ -23,7 +23,7 @@ public class OrderDaoDB implements OrderDao {
     JdbcTemplate jdbc;
 
     @Override
-    public Order getOrderByID(int id) {
+    public Order getOrderById(int id) {
         try{
             final String GET_ORDER_BY_ID = "SELECT * FROM orders WHERE orderId = ?";
             return jdbc.queryForObject(GET_ORDER_BY_ID, new OrderMapper(), id);
@@ -45,6 +45,19 @@ public class OrderDaoDB implements OrderDao {
                 "ORDER BY orderDate";
         return jdbc.query(GET_ALL_ORDERS_BY_CUSTOMER_ID_BY_DATE, new OrderMapper(),cid,date.toString());
     }
+
+    @Override
+    public Order createBlankOrder(int customerId) {
+        Order order = new Order();
+        order.setCustomerId(customerId);
+        order.setOrderPlacedTime(LocalTime.now());
+        order.setOrderDate(LocalDate.now());
+        order.setOrderStatus("Basket");
+        order.setTotal(new BigDecimal(0.00));
+
+        return order;
+    }
+
     @Override
     @Transactional
     public Order addOrder(Order order) {

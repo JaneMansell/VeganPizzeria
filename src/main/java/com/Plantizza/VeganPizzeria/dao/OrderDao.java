@@ -7,9 +7,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderDao {
-    Order getOrderByID(int id);
+    Order getOrderById(int id);
     List<Order> getAllOrders();
     List<Order> getAllOrdersByCustomerIdByDate(int cid, LocalDate date);
+    Order createBlankOrder(int customerId);
     Order addOrder(Order order);
     void updateOrder(Order order);
     BigDecimal calculateOrderTotal(int id);
