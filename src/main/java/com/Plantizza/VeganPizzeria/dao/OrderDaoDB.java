@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -36,6 +37,13 @@ public class OrderDaoDB implements OrderDao {
         return jdbc.query(GET_ALL_ORDERS, new OrderMapper());
     }
 
+    @Override
+    public List<Order> getAllOrdersByCustomerIdByDate(int cid, LocalDate date){
+        final String GET_ALL_ORDERS_BY_CUSTOMER_ID_BY_DATE = "SELECT * " +
+                "FROM orders WHERE customerId = ? AND orderDate = ? " +
+                "ORDER BY orderDate";
+        return jdbc.query(GET_ALL_ORDERS_BY_CUSTOMER_ID_BY_DATE, new OrderMapper(),cid,date.toString());
+    }
     @Override
     @Transactional
     public Order addOrder(Order order) {
@@ -89,8 +97,8 @@ public class OrderDaoDB implements OrderDao {
             Order order = new Order();
             order.setId(rs.getInt("orderId"));
             order.setCustomerId(rs.getInt("customerId"));
-            order.setOrderPlacedTime(LocalTime.parse((CharSequence) rs.getTime("orderPlacedTime")));
-            order.setOrderDate(LocalDate.parse((CharSequence) rs.getDate("orderDate")));
+            order.setOrderPlacedTime((rs.getTime("orderPlacedTime")).toLocalTime());
+            order.setOrderDate((rs.getDate("orderDate")).toLocalDate());
             order.setTotal(rs.getBigDecimal("total"));
             order.setOrderStatus(rs.getString("orderStatus"));
 
