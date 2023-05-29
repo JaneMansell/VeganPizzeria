@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -75,6 +76,14 @@ public class OrderDaoDB implements OrderDao {
                 order.getTotal(),
                 order.getOrderStatus(),
                 order.getId());
+    }
+
+    @Override
+    public BigDecimal calculateOrderTotal(int id) {
+        final String CALCULATE_ORDER_TOTAL = "SELECT SUM(lineCost) AS totalCost " +
+                "FROM orderLines " +
+                "WHERE orderId = ?";
+        return jdbc.queryForObject(CALCULATE_ORDER_TOTAL, new OrderMapper(), id).getTotal();
     }
 
     @Override

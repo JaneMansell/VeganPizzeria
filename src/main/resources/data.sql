@@ -69,5 +69,3 @@ INSERT INTO orderLines VALUES
 (8,5,'BBQ Jackfruit',1,8.99),
 (9,5,'Olive and Sundried Tomato',1,8.99);
 
-
-
