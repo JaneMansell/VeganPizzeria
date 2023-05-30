@@ -9,6 +9,7 @@ import java.util.List;
 public interface OrderDao {
     Order getOrderById(int id);
     List<Order> getAllOrders();
+    List<Order> getAllOrdersByDate(LocalDate date);
     List<Order> getAllOrdersByCustomerIdByDate(int cid, LocalDate date);
     Order createBlankOrder(int customerId);
     Order addOrder(Order order);

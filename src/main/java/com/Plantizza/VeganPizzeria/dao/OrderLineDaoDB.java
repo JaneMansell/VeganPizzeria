@@ -59,6 +59,16 @@ public class OrderLineDaoDB implements OrderLineDao {
     }
 
     @Override
+    public List<OrderLine> getAllOrderLines() {
+        try {
+            final String SELECT_ALL_ORDER_LINES = "SELECT * FROM orderLines";
+            return jdbc.query(SELECT_ALL_ORDER_LINES, new OrderLineMapper());
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     @Transactional
     public OrderLine addOrderLine(OrderLine orderLine, int orderId) {
         final String INSERT_ORDER_LINE = "INSERT INTO orderLines(orderId, pizzaName, quantity, lineCost) VALUES(?,?,?,?)";

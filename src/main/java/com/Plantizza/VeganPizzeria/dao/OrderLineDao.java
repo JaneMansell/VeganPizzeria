@@ -12,6 +12,7 @@ public interface OrderLineDao {
     OrderLine getOrderLineByOrderId(int orderId);
 
     List<OrderLine> getOrderLinesByCustomerId(int customerId);
+    List<OrderLine> getAllOrderLines();
 
     OrderLine addOrderLine(OrderLine orderLine, int orderId);
 
