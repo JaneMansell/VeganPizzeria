@@ -39,10 +39,10 @@ public class OrderLineDaoDB implements OrderLineDao {
     }
 
     @Override
-    public OrderLine getOrderLineByOrderId(int orderId) {
+    public List<OrderLine> getOrderLinesByOrderId(int orderId) {
         try {
             final String SELECT_ORDER_LINE_BY_ORDER_ID = "SELECT * FROM orderLines WHERE orderId = ?";
-            return jdbc.queryForObject(SELECT_ORDER_LINE_BY_ORDER_ID, new OrderLineMapper(), orderId);
+            return jdbc.query(SELECT_ORDER_LINE_BY_ORDER_ID, new OrderLineMapper(), orderId);
         } catch (DataAccessException ex) {
             return null;
         }
@@ -56,6 +56,16 @@ public class OrderLineDaoDB implements OrderLineDao {
                 "WHERE o.customerId = ?";
         List<OrderLine> orderLines = jdbc.query(SELECT_ORDER_LINES_BY_CUSTOMER_ID, new OrderLineMapper(), customerId);
         return orderLines;
+    }
+
+    @Override
+    public List<OrderLine> getAllOrderLines() {
+        try {
+            final String SELECT_ALL_ORDER_LINES = "SELECT * FROM orderLines";
+            return jdbc.query(SELECT_ALL_ORDER_LINES, new OrderLineMapper());
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     @Override

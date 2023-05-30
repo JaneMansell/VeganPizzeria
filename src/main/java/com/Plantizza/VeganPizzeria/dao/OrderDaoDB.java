@@ -39,6 +39,21 @@ public class OrderDaoDB implements OrderDao {
     }
 
     @Override
+    public List<Order> getAllOrdersByDate(LocalDate date){
+        final String GET_ALL_ORDERS_BY_DATE = "SELECT * " +
+                "FROM orders WHERE orderDate = ? " +
+                "ORDER BY orderPlacedTime";
+        return jdbc.query(GET_ALL_ORDERS_BY_DATE, new OrderMapper(), date.toString());
+    }
+
+    @Override
+    public List<Order> getAllOrdersByDateForCook(LocalDate date){
+        final String GET_ALL_ORDERS_BY_DATE_FOR_COOK = "SELECT * " +
+                "FROM orders WHERE orderDate = ? AND (orderStatus = ? OR orderStatus =?) " +
+                "ORDER BY orderPlacedTime";
+        return jdbc.query(GET_ALL_ORDERS_BY_DATE_FOR_COOK, new OrderMapper(), date.toString(), "Cooking", "Ordered");
+    }
+    @Override
     public List<Order> getAllOrdersByCustomerIdByDate(int cid, LocalDate date){
         final String GET_ALL_ORDERS_BY_CUSTOMER_ID_BY_DATE = "SELECT * " +
                 "FROM orders WHERE customerId = ? AND orderDate = ? " +
