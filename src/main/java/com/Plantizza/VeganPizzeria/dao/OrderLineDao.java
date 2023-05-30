@@ -14,7 +14,7 @@ public interface OrderLineDao {
     List<OrderLine> getOrderLinesByCustomerId(int customerId);
     List<OrderLine> getAllOrderLines();
 
-    OrderLine addOrderLine(OrderLine orderLine, int orderId);
+    OrderLine addOrderLine(OrderLine orderLine);
 
     void updateOrderLine(OrderLine orderLine);
 
