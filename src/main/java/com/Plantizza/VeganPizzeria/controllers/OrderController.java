@@ -52,4 +52,13 @@ public class OrderController {
         return "cookTrackOrder";
     }
 
+    @GetMapping("orderDetail")
+    public String orderDetail(Integer id, Model model) {
+        Order order = orderDao.getOrderById(id);
+        List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(id);
+        model.addAttribute("order", order);
+        model.addAttribute("orderLines", orderLines);
+        return "orderDetail";
+    }
+
 }

@@ -35,7 +35,7 @@
                 <tr th:each = "order : ${orders}">
                     <td th:text="${order.orderPlacedTime}">Order ID</td>
                     <td th:text="${order.id}">Order ID</td>
-                    <td>Details</td>
+                    <td><a href="#" th:href="@{/orderDetail(id=${order.id})}">Details</a></td>
                     <td th:text="${order.orderStatus}">Order Status</td>
                     <td>Change Status</td>
                 </tr>
