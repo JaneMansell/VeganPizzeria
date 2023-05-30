@@ -44,7 +44,7 @@ public class OrderController {
     public String displayStatusToCook (Model model) {
         //LocalDate today = LocalDate.now(); Add when there is an order for today
         LocalDate today = LocalDate.parse("2023-05-26"); //Remove when in production
-        List<Order> orders = orderDao.getAllOrdersByDate(today);
+        List<Order> orders = orderDao.getAllOrdersByDateForCook(today);
         List<OrderLine> orderLines = orderLineDao.getAllOrderLines();
         model.addAttribute("orders", orders);
         model.addAttribute("orderLines", orderLines);
