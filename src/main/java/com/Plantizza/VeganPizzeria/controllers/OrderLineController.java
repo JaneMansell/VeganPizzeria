@@ -36,15 +36,30 @@ public class OrderLineController {
     @Autowired
     PizzaDao pizzaDao;
 
-    int customerId = 4;
+    int customerId = 5;
+
+    @ModelAttribute("order")
+    public Order createOrder(){
+        Order order = orderDao.createBlankOrder(this.customerId);  // Create a new blank order
+        order = orderDao.addOrder(order); // add Order
+        return order;
+    }
 
     @GetMapping("placeOrder")
-    public String displayOrderLines(Model model) {
-        Order order = orderDao.createBlankOrder(this.customerId);  // Create a new blank order
+    public String startOrder(Model model, @ModelAttribute("order") Order order) {
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
 
-        model.addAttribute("order", order);
+        model.addAttribute("orderLines", orderLines);
+        model.addAttribute("pizzas", pizzas);
+        return "placeOrder";
+    }
+
+    @GetMapping("ordering")
+    public String displayOrderLines(Model model, Integer orderId) {
+        List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(orderId);
+        List<Pizza> pizzas = pizzaDao.getAllPizzas();
+
         model.addAttribute("orderLines", orderLines);
         model.addAttribute("pizzas", pizzas);
         return "placeOrder";
@@ -69,10 +84,10 @@ public class OrderLineController {
         orderLine.setLineCost(lineCost);
 
         // Add the OrderLine to the database
-        orderLineDao.addOrderLine(orderLine, order.getId());
+        orderLineDao.addOrderLine(orderLine);
 
         // Redirect to the placeOrder page with the same orderId
-        return "redirect:/placeOrder?orderId=" + order.getId();
+        return "redirect:/ordering?orderId=" + order.getId();
     }
 
     @GetMapping("/deleteOrderLine")

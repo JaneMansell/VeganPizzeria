@@ -70,7 +70,7 @@ public class OrderLineDaoDB implements OrderLineDao {
 
     @Override
     @Transactional
-    public OrderLine addOrderLine(OrderLine orderLine, int orderId) {
+    public OrderLine addOrderLine(OrderLine orderLine) {
         final String INSERT_ORDER_LINE = "INSERT INTO orderLines(orderId, pizzaName, quantity, lineCost) VALUES(?,?,?,?)";
         jdbc.update(INSERT_ORDER_LINE,
                 orderLine.getOrderId(),
@@ -80,7 +80,6 @@ public class OrderLineDaoDB implements OrderLineDao {
 
         int newLineOrderId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         orderLine.setLineOrderId(newLineOrderId);
-        orderLine.setOrderId(orderId);
 
         return orderLine;
     }
