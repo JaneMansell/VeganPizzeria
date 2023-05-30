@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,27 +37,21 @@ public class OrderLineController {
     PizzaDao pizzaDao;
 
     int customerId = 4;
-    int orderId = 6;
 
     @GetMapping("placeOrder")
     public String displayOrderLines(Model model) {
-        List<OrderLine> orderLines = orderLineDao.getOrderLinesByCustomerId(this.customerId);
+        Order order = orderDao.createBlankOrder(this.customerId);  // Create a new blank order
+        List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
 
+        model.addAttribute("order", order);
         model.addAttribute("orderLines", orderLines);
         model.addAttribute("pizzas", pizzas);
         return "placeOrder";
     }
 
     @PostMapping("/addOrderLine")
-    public String addOrderLine(OrderLine orderLine, HttpServletRequest request) {
-
-        // Create the Order
-        Order order = orderDao.createBlankOrder(this.customerId);
-
-        // Persist the Order
-        order = orderDao.addOrder(order);
-
+    public String addOrderLine(@ModelAttribute("order") Order order, OrderLine orderLine, HttpServletRequest request) {
         // Set the orderId for the OrderLine
         orderLine.setOrderId(order.getId());
 
@@ -74,9 +69,10 @@ public class OrderLineController {
         orderLine.setLineCost(lineCost);
 
         // Add the OrderLine to the database
-        orderLineDao.addOrderLine(orderLine, orderId);
+        orderLineDao.addOrderLine(orderLine, order.getId());
 
-        return "redirect:/placeOrder";
+        // Redirect to the placeOrder page with the same orderId
+        return "redirect:/placeOrder?orderId=" + order.getId();
     }
 
     @GetMapping("/deleteOrderLine")
@@ -86,7 +82,7 @@ public class OrderLineController {
     }
 
     @PostMapping("/submitOrder")
-    public String submitOrder(Order order, Model model){
+    public String submitOrder(@ModelAttribute("order") Order order, Model model){
         BigDecimal orderTotal = orderDao.calculateOrderTotal(order.getId());
         order.setTotal(orderTotal);
         order.setOrderStatus("Ordered");
@@ -97,5 +93,4 @@ public class OrderLineController {
 
         return "redirect:/placeOrder";
     }
-
 }

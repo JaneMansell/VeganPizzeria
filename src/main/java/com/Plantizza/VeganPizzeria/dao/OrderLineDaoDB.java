@@ -39,10 +39,10 @@ public class OrderLineDaoDB implements OrderLineDao {
     }
 
     @Override
-    public OrderLine getOrderLineByOrderId(int orderId) {
+    public List<OrderLine> getOrderLinesByOrderId(int orderId) {
         try {
             final String SELECT_ORDER_LINE_BY_ORDER_ID = "SELECT * FROM orderLines WHERE orderId = ?";
-            return jdbc.queryForObject(SELECT_ORDER_LINE_BY_ORDER_ID, new OrderLineMapper(), orderId);
+            return jdbc.query(SELECT_ORDER_LINE_BY_ORDER_ID, new OrderLineMapper(), orderId);
         } catch (DataAccessException ex) {
             return null;
         }
