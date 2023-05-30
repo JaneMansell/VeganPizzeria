@@ -89,6 +89,8 @@ public class OrderDaoDB implements OrderDao {
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         order.setId(newId);
 
+        addOrder(order);
+
         return order;
     }
 
