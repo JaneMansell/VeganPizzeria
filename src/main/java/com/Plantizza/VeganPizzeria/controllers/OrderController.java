@@ -22,13 +22,16 @@ public class OrderController {
     CustomerDao customerDao;
 
     @GetMapping("customerTrackOrder")
-    public String displayStatusToCustomer(Integer customerId, Model model) {
+    public String displayStatusToCustomer(Model model) {
 
         //LocalDate today = LocalDate.now(); Add when there is an order for today
         customerId = 3; //Remove when login complete
         LocalDate today = LocalDate.parse("2023-05-26"); //Remove when in production
+
         List<Order> orders = orderDao.getAllOrdersByCustomerIdByDate(customerId,today);
         model.addAttribute("orders", orders);
+
+
         return "customerTrackOrder";
     }
 
