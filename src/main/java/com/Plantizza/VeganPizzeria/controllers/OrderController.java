@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 public class OrderController {
@@ -48,8 +51,11 @@ public class OrderController {
         LocalDate today = LocalDate.parse("2023-05-26"); //Remove when in production
         List<Order> orders = orderDao.getAllOrdersByDateForCook(today);
         List<OrderLine> orderLines = orderLineDao.getAllOrderLines();
+        List<String> availableStatusToCook = Stream.of("Ordered","Cooking", "Pick up")
+                        .collect(Collectors.toList());
         model.addAttribute("orders", orders);
         model.addAttribute("orderLines", orderLines);
+        model.addAttribute("availableStatusToCook", availableStatusToCook);
 
         return "cookTrackOrder";
     }
@@ -61,6 +67,17 @@ public class OrderController {
         model.addAttribute("order", order);
         model.addAttribute("orderLines", orderLines);
         return "orderDetail";
+    }
+
+    @PostMapping("editStatus")
+    public String editStatus(String status, String id){
+        System.out.println("My order Id is "+id);
+        System.out.println("My status is "+status);
+        int orderId = Integer.parseInt(id);
+        Order order = orderDao.getOrderById(orderId);
+        order.setOrderStatus(status);
+        orderDao.updateOrder(order);
+        return "redirect:/cookTrackOrder";
     }
 
 }
