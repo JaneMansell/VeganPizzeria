@@ -45,8 +45,8 @@ public class UserLoginController {
             String status = user.getUserType();
             System.out.println("I am a "+ status);
             if (status.equalsIgnoreCase("customer")){
-                //do something else temporary solution
-                return "redirect:/login";
+                //this will need to take the customer ID with it.
+                return "redirect:/customerMenu";
             }
             else if (status.equalsIgnoreCase("Employee")){
                 return "redirect:/employeeMenu";
