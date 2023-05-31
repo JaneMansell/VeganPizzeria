@@ -45,7 +45,9 @@ CONSTRAINT FOREIGN KEY fk_StatusOfOrderOrders
 
 CREATE TABLE pizzas(
 pizzaName VARCHAR(50) PRIMARY KEY,
-pizzaPrice DECIMAL(4,2)
+pizzaPrice DECIMAL(4,2),
+pizzaDesc MEDIUMTEXT,
+pizzaImgURL TINYTEXT
 );
 
 CREATE TABLE orderLines(

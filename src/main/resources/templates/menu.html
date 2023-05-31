@@ -29,12 +29,12 @@
       background-size: cover;
       background-position: center;
       opacity: 0.15;
-      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
+      position: fixed;
     }
 
     header {
@@ -63,7 +63,7 @@
 
     .centralBand {
       background-color: rgba(255, 255, 255, 0.4);
-      position: absolute;
+      position: fixed;
       top: 0;
       bottom: 0;
       left: 50%;
@@ -84,17 +84,6 @@
       padding: 0;
       z-index: 2;
     }
-
-    .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-    .card {
-    width: 18rem;
-    margin-bottom: 20px;
-  }
 
     .buttons {
       text-align: center;
@@ -138,7 +127,7 @@
 <!--Main Body of Page -->
 <body>
 <header>
-  <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: fixed; top: 0; left: 0;">
+  <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: absolute; top: 0; left: 0;">
     <h1>Plantizza</h1>
   </div>
 </header>
@@ -152,13 +141,15 @@
 
   <!--displays a card for each pizza on menu-->
   <form action="menu" method="GET">
-    <div th:each="pizza : ${pizzas}" class="card-container">
-      <div class="card">
-        <img class="card-img-top" th:src="@{/images/vegan-pizza.jpg}" alt="Card image cap">
+    <div class="row">
+      <div th:each="pizza : ${pizzas}" class="col-md-4" style="margin-bottom: 20px;">
+        <div class="card" style="height: 100%; width: 100%;">
+        <img class="card-img-top" th:src="${pizza.pizzaImgURL}" alt="pizza img" style="height: 200px; width: 100%;">
         <div class="card-body">
         <h5 class="card-title" th:text="${pizza.pizzaName + ' - £' + pizza.pizzaPrice}">Pizza name - £0.00</h5>
-        <p class="card-text" th:text="${pizza.pizzaPrice}">Pizza Description</p> <!-- will replace pizzaPrice with its description -->
+        <p class="card-text" th:text="${pizza.pizzaDesc}">Pizza Description</p> <!-- will replace pizzaPrice with its description -->
 <!-- button. can reinstate if needed e.g. to order <a href="#" class="btn btn-primary">Go somewhere</a>-->
+        </div>
         </div>
       </div>
     </div>
