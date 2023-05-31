@@ -24,7 +24,7 @@
 
     body:before {
       content: "";
-      background-image: url('../images/vegan-pizza.jpg');
+      background-image: url('/images/vegan-pizza.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -139,7 +139,7 @@
   <h2>OUR PIZZAS</h2>
 
   <!--displays a card for each pizza on menu-->
-  <form action="/addOrderLine" method="POST">
+  <form action="menu" method="GET">
     <div th:each="pizza : ${pizzas}" class="card" style="width: 18rem;">
       <img class="card-img-top" th:src="${../images/vegan-pizza-oven.jpg}" alt="Card image cap">
       <div class="card-body">
