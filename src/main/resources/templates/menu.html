@@ -8,7 +8,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-  <title>Plantizza - Home</title>
+  <title>Plantizza - Menu</title>
   <style>
     body {
       background-color: #356036;
@@ -38,16 +38,52 @@
     }
 
     header {
-      background-color: transparent;
       padding: 20px;
       text-align: center;
+      z-index: 2;
     }
 
     h1 {
       color: #fff;
       font-family: 'New Tegomin', serif; /* New Tegomin font */
-      font-size: 10rem;
+      font-size: 5rem;
       margin-top: 0;
+      padding-top: 0;
+    }
+
+    h2 {
+      color: #356036;
+      font-family: 'PT Sans Narrow', sans-serif; /* PT Sans Narrow font */
+      font-size: 4rem;
+      margin-top: 0;
+      padding-top: 0;
+      padding-left: 20px;
+      /* Custom styles for the subheading */
+      margin-bottom: 20px;
+    }
+
+    .centralBand {
+      background-color: rgba(255, 255, 255, 0.4);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      padding: 50px 0;
+      z-index: 1;
+    }
+
+    .contents {
+    background-color: transparent;
+      position: absolute;
+      top: 16%;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      padding: 0;
+      z-index: 2;
     }
 
     .buttons {
@@ -69,7 +105,6 @@
     text-decoration: none; /* Remove underline */
   }
 
-
     .buttons .btn:first-child {
       margin-right: 40px;
     }
@@ -86,15 +121,34 @@
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
+<!--Main Body of Page -->
 <body>
 <header>
-  <h1>Plantizza</h1>
-  <div class="buttons">
-    <a th:href="menu" class="btn">View Menu</a>
-    <a th:href="signIn" class="btn">Sign In</a>
+  <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: fixed; top: 0; left: 0;">
+    <h1>Plantizza</h1>
   </div>
 </header>
+
+<div class="centralBand">
+</div>
+
+<div class="contents">
+  <!-- Put page contents here -->
+  <h2>OUR PIZZAS</h2>
+
+
+
+
+
+
+
+
+</div>
+
+<!-- End main body -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
