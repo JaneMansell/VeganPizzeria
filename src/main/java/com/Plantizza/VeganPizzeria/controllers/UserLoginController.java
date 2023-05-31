@@ -36,23 +36,24 @@ public class UserLoginController {
         String password = request.getParameter("password");
         UserLogin user = userLoginDao.getuserLoginByEmailAddress(email);
         if (user == null){
-            return "redirect:/inputLoginDetails";
+            return "redirect:/login";
         }
         else if (!user.getPassword().equals(password)){
-            return "redirect:/inputLoginDetails";
+            return "redirect:/login";
         }
         else {
             String status = user.getUserType();
-            if (status == "customer"){
+            System.out.println("I am a "+ status);
+            if (status.equalsIgnoreCase("customer")){
                 //do something else temporary solution
-                return "redirect:/inputLoginDetails";
+                return "redirect:/login";
             }
-            else if (status == "employee"){
-                return "employeeMenu";
+            else if (status.equalsIgnoreCase("Employee")){
+                return "redirect:/employeeMenu";
             }
             else {
                 //do something else temporary solution
-                return "redirect:/inputLoginDetails";
+                return "redirect:/login";
             }
         }
 
