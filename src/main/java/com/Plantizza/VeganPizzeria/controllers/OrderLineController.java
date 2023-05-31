@@ -46,7 +46,11 @@ public class OrderLineController {
     }
 
     @GetMapping("placeOrder")
-    public String startOrder(Model model, @ModelAttribute("order") Order order) {
+    public String startOrder(@RequestParam(name = "id") String id, Model model) {
+        int customerId = Integer.parseInt(id);
+        System.out.println("I am customer " + customerId);
+        Order order = orderDao.createBlankOrder(customerId);
+
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
 

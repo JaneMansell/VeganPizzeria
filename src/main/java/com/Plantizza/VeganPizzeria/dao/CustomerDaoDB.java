@@ -28,6 +28,16 @@ public class CustomerDaoDB implements CustomerDao{
     }
 
     @Override
+    public Customer getCustomerByEmail(String email) {
+        try {
+            final String SELECT_CUSTOMER_BY_EMAIL = "SELECT * FROM customers WHERE customerEmailAddress = ?";
+            return jdbc.queryForObject(SELECT_CUSTOMER_BY_EMAIL, new CustomerMapper(), email);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public Customer addCustomer(Customer customer) {
         final String INSERT_CUSTOMER = "INSERT INTO customers(customerName, customerEmailAddress, " +
                 "customerFirstLineAddress, customerPostCode, customerPhone) " +

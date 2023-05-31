@@ -5,10 +5,12 @@ import com.Plantizza.VeganPizzeria.dao.OrderDao;
 import com.Plantizza.VeganPizzeria.dao.OrderLineDao;
 import com.Plantizza.VeganPizzeria.entities.Order;
 import com.Plantizza.VeganPizzeria.entities.OrderLine;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +20,6 @@ public class OrderController {
 
     @Autowired
     OrderDao orderDao;
-    private int customerId =4; //To be removed when login functionality is added.
 
     @Autowired
     CustomerDao customerDao;
@@ -27,10 +28,11 @@ public class OrderController {
     OrderLineDao orderLineDao;
 
     @GetMapping("customerTrackOrder")
-    public String displayStatusToCustomer(Model model) {
+    public String displayStatusToCustomer(@RequestParam(name = "id") String id, Model model) {
 
         //LocalDate today = LocalDate.now(); Add when there is an order for today
-        customerId = 3; //Remove when login complete
+        int customerId = Integer.parseInt(id);
+        System.out.println("I am customer " + customerId);
         LocalDate today = LocalDate.parse("2023-05-26"); //Remove when in production
 
         List<Order> orders = orderDao.getAllOrdersByCustomerIdByDate(customerId,today);

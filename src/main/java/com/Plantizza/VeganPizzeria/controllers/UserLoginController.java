@@ -3,6 +3,7 @@ package com.Plantizza.VeganPizzeria.controllers;
 import com.Plantizza.VeganPizzeria.dao.CustomerDao;
 import com.Plantizza.VeganPizzeria.dao.EmployeeDao;
 import com.Plantizza.VeganPizzeria.dao.UserLoginDao;
+import com.Plantizza.VeganPizzeria.entities.Customer;
 import com.Plantizza.VeganPizzeria.entities.UserLogin;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,16 @@ public class UserLoginController {
             String status = user.getUserType();
             System.out.println("I am a "+ status);
             if (status.equalsIgnoreCase("customer")){
-                //this will need to take the customer ID with it.
-                return "redirect:/customerMenu";
+                //this needs to take the customer ID with it.
+                Customer customer = customerDao.getCustomerByEmail(email);
+                int customerId = customer.getCustomerId();
+                return "redirect:/customerMenu/"+customerId;
             }
             else if (status.equalsIgnoreCase("Employee")){
                 return "redirect:/employeeMenu";
             }
             else {
-                //do something else temporary solution
+                //in the future this will be admin user
                 return "redirect:/login";
             }
         }

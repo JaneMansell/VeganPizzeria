@@ -22,10 +22,10 @@
   </div>
   <div class="row m-4 border border-dark">
     <div class="col text-center m-3">
-      <a href="placeOrder" class="btn btn-outline-primary btn-lg">Place Order</a>
+      <a href= "#" th:href="@{/placeOrder(id=${customerId})}" class="btn btn-outline-primary btn-lg">Place Order</a>
     </div>
     <div class="col text-center m-3">
-      <a href="customerTrackOrder" class="btn btn-outline-primary btn-lg">Track Order (Customer)</a>
+      <a href="#" th:href= "@{/customerTrackOrder(id=${customerId})}" class="btn btn-outline-primary btn-lg">Track Order (Customer)</a>
     </div>
   </div>
 </div>
