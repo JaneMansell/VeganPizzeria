@@ -10,5 +10,7 @@ public interface CustomerDao {
 
     Customer getCustomerById(int customerId);
 
+    Customer getCustomerByEmail(String email);
+
     Customer addCustomer(Customer customer);
 }
