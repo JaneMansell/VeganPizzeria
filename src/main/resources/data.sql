@@ -1,11 +1,25 @@
 USE veganPizzeria;
 
 INSERT INTO pizzas VALUES
-('Plain', 6.99),
-('BBQ Jackfruit', 8.99),
-('Mushroom', 8.99),
-('Roasted Veg', 8.99),
-('Olive and Sundried Tomato', 8.99);
+('Plain', 6.99,
+'A classic vegan delight with a crispy crust, flavourful tomato sauce, fresh herbs, and a touch of sea salt.',
+'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
+
+('BBQ Jackfruit', 8.99,
+'Tangy BBQ jackfruit on a crispy crust, topped with colourful bell peppers, red onions, and vegan cheese.',
+'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
+
+('Mushroom', 8.99,
+'Robust and earthy, this pizza features a blend of cremini, shiitake, and oyster mushrooms with vegan cheese and fresh thyme.',
+'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
+
+('Roasted Veg', 8.99,
+'Bursting with flavours of roasted zucchini, bell peppers, eggplant, and cherry tomatoes, finished with herb-infused olive oil.',
+'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
+
+('Olive and Sundried Tomato', 8.99,
+'A Mediterranean-inspired delight with Kalamata olives, sundried tomatoes, vegan feta cheese, and a drizzle of olive oil.',
+'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg');
 
 INSERT INTO statusOfOrder VALUES
 ('Basket'),

@@ -41,6 +41,8 @@ public class PizzaDaoDB implements PizzaDao {
             Pizza pizza = new Pizza();
             pizza.setPizzaName(rs.getString("pizzaName"));
             pizza.setPizzaPrice(rs.getBigDecimal("pizzaPrice"));
+            pizza.setPizzaDesc(rs.getString("pizzaDesc"));
+            pizza.setPizzaImgURL(rs.getString("pizzaImgURL"));
 
             return pizza;
         }

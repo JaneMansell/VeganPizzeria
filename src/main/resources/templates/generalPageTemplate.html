@@ -29,12 +29,12 @@
       background-size: cover;
       background-position: center;
       opacity: 0.15;
-      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
+      position: fixed;
     }
 
     header {
@@ -52,7 +52,7 @@
     }
 
     h2 {
-      color: #000;
+      color: #356036;
       font-family: 'PT Sans Narrow', sans-serif; /* PT Sans Narrow font */
       font-size: 4rem;
       margin-top: 0;
@@ -63,7 +63,7 @@
 
     .centralBand {
       background-color: rgba(255, 255, 255, 0.4);
-      position: absolute;
+      position: fixed;
       top: 0;
       bottom: 0;
       left: 50%;
@@ -84,6 +84,7 @@
       padding: 0;
       z-index: 2;
     }
+
 
     .buttons {
       text-align: center;
@@ -127,7 +128,7 @@
 <!--Main Body of Page -->
 <body>
 <header>
-  <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: fixed; top: 0; left: 0;">
+  <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: absolute; top: 0; left: 0;">
     <h1>Plantizza</h1>
   </div>
 </header>
