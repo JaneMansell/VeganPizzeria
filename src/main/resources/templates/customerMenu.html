@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <!-- Required meta tags -->
@@ -6,35 +6,185 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-  <title>Plantizza</title>
+  <title>Plantizza - Customer Menu</title>
+  <style>
+    body {
+      background-color: #356036;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    body:before {
+      content: "";
+      background-image: url('/images/vegan-pizza.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      position: fixed;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    h1 {
+      color: #fff;
+      font-family: 'New Tegomin', serif; /* New Tegomin font */
+      font-size: 5rem;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    h2 {
+      color: #356036;
+      font-family: 'PT Sans Narrow', sans-serif; /* PT Sans Narrow font */
+      font-size: 4rem;
+      margin-top: 0;
+      padding-bottom: 15px;
+      /* Custom styles for the subheading */
+      margin-bottom: 20px;
+    }
+
+    .centralBand {
+      background-color: rgba(255, 255, 255, 0.4);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      padding: 50px 0;
+      z-index: 1;
+    }
+
+    .contents {
+    background-color: transparent;
+      position: absolute;
+      top: 2%;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 65%;
+      padding: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .roundButtons {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .roundButtons .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 2rem;
+    background-color: rgba(53,96,54,0.8);
+    color: #fff !important; /* Set button text color to white */
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    transition: background-color 0.3s ease;
+    font-family: 'New Tegomin', serif;
+    font-weight: bold; /* Set button text to bold */
+    text-decoration: none; /* Remove underline */
+
+  }
+
+    .roundButtons .btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #000;
+    }
+
+    .exitButtons {
+  }
+
+  .exitButtons .btn {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-family: 'New Tegomin', serif;
+  }
+
+  .exitButtons .btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #000;
+  }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍕</text></svg>">
 </head>
-<body>
 
-<!-- Main Body of Page -->
-<div class="container">
-  <div class="row m-4">
-    <div class="col text-center border border-dark">
-      <h1>Plantizza</h1>
+<!--Main Body of Page -->
+<body>
+<header>
+  <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: absolute; top: 0; left: 0;">
+    <div class="exitButtons">
+      <a href="/" class="btn" style="position: absolute; left: 20px; top: 20px;">Sign Out</a>
     </div>
+    <h1>Plantizza</h1>
+
   </div>
-  <div class="row m-4 border border-dark">
-    <div class="col text-center m-3">
-      <a href= "#" th:href="@{/placeOrder(id=${customerId})}" class="btn btn-outline-primary btn-lg">Place Order</a>
-    </div>
-    <div class="col text-center m-3">
-      <a href="#" th:href= "@{/customerTrackOrder(id=${customerId})}" class="btn btn-outline-primary btn-lg">Track Order (Customer)</a>
-    </div>
-  </div>
+</header>
+
+
+<div class="centralBand">
 </div>
+
+<div class="contents">
+  <!-- Put page contents here -->
+
+    <div class="roundButtons">
+      <a href= "#" th:href="@{/placeOrder(id=${customerId})}" class="btn">Place Order</a>
+    </div>
+    <div class="roundButtons">
+      <a href="#" th:href= "@{/customerTrackOrder(id=${customerId})}" class="btn">Track My<br>Order</a>
+    </div>
+  </div>
+
+
+</div>
+
 <!-- End main body -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
-</html>;
+</html>

@@ -17,7 +17,7 @@ INSERT INTO pizzas VALUES
 'Bursting with flavours of roasted zucchini, bell peppers, eggplant, and cherry tomatoes, finished with herb-infused olive oil.',
 'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
 
-('Olive and Sundried Tomato', 8.99,
+('Olive & Sundried Tomato', 8.99,
 'A Mediterranean-inspired delight with Kalamata olives, sundried tomatoes, vegan feta cheese, and a drizzle of olive oil.',
 'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg');
 
@@ -81,5 +81,5 @@ INSERT INTO orderLines VALUES
 (6,3,'Roasted Veg',1,8.99),
 (7,4,'Plain',2,13.98),
 (8,5,'BBQ Jackfruit',1,8.99),
-(9,5,'Olive and Sundried Tomato',1,8.99);
+(9,5,'Olive & Sundried Tomato',1,8.99);
 

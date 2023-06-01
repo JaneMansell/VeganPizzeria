@@ -45,7 +45,7 @@
 
     h1 {
       color: #fff;
-      font-family: 'New Tegomin', serif; /* New Tegomin font */
+      font-family: 'New Tegomin', serif;
       font-size: 5rem;
       margin-top: 0;
       padding-top: 0;
@@ -53,12 +53,12 @@
 
     h2 {
       color: #356036;
-      font-family: 'PT Sans Narrow', sans-serif; /* PT Sans Narrow font */
+      font-family: 'New Tegomin', serif;
       font-size: 4rem;
       margin-top: 0;
       padding-bottom: 15px;
-      /* Custom styles for the subheading */
       margin-bottom: 20px;
+      text-align: center;
     }
 
     .centralBand {
@@ -81,6 +81,19 @@
       left: 50%;
       transform: translateX(-50%);
       width: 65%;
+      padding: 0;
+      z-index: 2;
+    }
+
+    .formBox {
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.7);
+      position: relative;
+      top: 3%;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
       padding: 0;
       z-index: 2;
     }
@@ -112,12 +125,58 @@
       background-color: rgba(255, 255, 255, 0.2);
     }
 
-    footer {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
+    .exitButtons {
+  }
+
+  .exitButtons .btn {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-family: 'New Tegomin', serif;
+  }
+
+  .exitButtons .btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #000;
+  }
+
+  .card {
+    height: 100%;
+    width: 100%;
+  }
+
+  .card-img-top {
+    height: 200px;
+    width: 100%;
+  }
+
+  .card-header {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    font-family: 'New Tegomin', serif;
+  }
+
+  .card-title {
+   margin-top: 0;
+   padding-top: 0;
+   font-size: 1.25rem;
+   font-weight: bold;
+  }
+
+  .card-text {
+  }
+
+   footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+   }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
@@ -128,6 +187,9 @@
 <body>
 <header>
   <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: absolute; top: 0; left: 0;">
+    <div class="exitButtons">
+      <a href="/" class="btn" style="position: absolute; left: 20px; top: 20px;">Back</a>
+    </div>
     <h1>Plantizza</h1>
   </div>
 </header>
@@ -136,27 +198,29 @@
 </div>
 
 <div class="contents">
-  <!-- Put page contents here -->
-  <h2>OUR PIZZAS</h2>
 
-  <!--displays a card for each pizza on menu-->
-  <form action="menu" method="GET">
-    <div class="row">
-      <div th:each="pizza : ${pizzas}" class="col-md-4" style="margin-bottom: 20px;">
-        <div class="card" style="height: 100%; width: 100%;">
-        <img class="card-img-top" th:src="${pizza.pizzaImgURL}" alt="pizza img" style="height: 200px; width: 100%;">
-        <div class="card-body">
-        <h5 class="card-title" th:text="${pizza.pizzaName + ' - £' + pizza.pizzaPrice}">Pizza name - £0.00</h5>
-        <p class="card-text" th:text="${pizza.pizzaDesc}">Pizza Description</p> <!-- will replace pizzaPrice with its description -->
-<!-- button. can reinstate if needed e.g. to order <a href="#" class="btn btn-primary">Go somewhere</a>-->
-        </div>
-        </div>
+  <div class="formBox">
+    <h2>~ OUR PIZZAS ~</h2>
+    <div class="row m-4">
+      <div class="col text-center">
+        <!--displays a card for each pizza on menu-->
+        <form action="menu" method="GET">
+          <div class="row">
+            <div th:each="pizza : ${pizzas}" class="col-md-4" style="margin-bottom: 20px;">
+              <div class="card" style="height: 100%; width: 100%;">
+                <div class="card-header" th:text="${pizza.pizzaName}"></div>
+                <img class="card-img-top" th:src="${pizza.pizzaImgURL}" alt="pizza img" style="height: 200px; width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${'£' + pizza.pizzaPrice}">Pizza Price</h5>
+                  <p class="card-text" th:text="${pizza.pizzaDesc}">Pizza Description</p> <!-- will replace pizzaPrice with its description -->
+                  <!-- button. can reinstate if needed e.g. to order <a href="#" class="btn btn-primary">Go somewhere</a>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-  </form>
-
-
-</div>
 
 <!-- End main body -->
 
