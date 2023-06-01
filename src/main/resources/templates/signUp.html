@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-    <title>Plantizza - Login</title>
+    <title>Plantizza - Sign Up</title>
     <style>
     body {
       background-color: #356036;
@@ -89,12 +89,12 @@
       border-radius: 10px;
       background-color: rgba(255, 255, 255, 0.7);
       position: absolute;
-      top: 10%;
+      top: 3%;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
-      height: 55%;
+      height: 92%;
       padding: 0;
       z-index: 2;
     }
@@ -109,7 +109,7 @@
     }
 
     .buttons .btn {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px 100px;
     color: #fff;
     background-color: #356036;
@@ -153,30 +153,69 @@
     <!-- Put page contents here -->
     <!--Form to log in-->
     <div class="formBox">
-        <h2>Login</h2>
-        <form align="center" action="inputLoginDetails" method="POST">
-            <div class="form-group row justify-content-center">
-                <label for="email" class="col-2 col-form-label custom-label">Email</label>
+        <h2>Sign up</h2>
+        <form align="center" action="registerNewDetails" method="POST">
+            <div class="form-group row">
+                <label for="name" class="col-3 col-form-label custom-label">Name</label>
                 <div class="col-7">
-                    <input type="email" name="email"
-                           id="email" placeholder="name@domain.com" class="form-control"/>
+                    <input type="name" name="name" id="name" class="form-control"/>
                 </div>
             </div>
-            <div class="form-group row justify-content-center">
-                <label for="password" class="col-2 col-form-label custom-label">Password</label>
+
+            <div class="form-group row">
+                <label for="email" class="col-3 col-form-label custom-label">Email</label>
+                <div class="col-7">
+                    <input type="email" name="email" id="email" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="phone" class="col-3 col-form-label custom-label">Phone</label>
+                <div class="col-7">
+                    <input type="phone" name="phone" id="phone" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="address" class="col-3 col-form-label custom-label">Address</label>
+                <div class="col-7">
+                    <input type="address" name="address" id="address" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="postCode" class="col-3 col-form-label custom-label">Post Code</label>
+                <div class="col-7">
+                    <input type="postCode" name="postCode" id="postCode" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="password" class="col-3 col-form-label custom-label">Password</label>
                 <div class="col-7">
                     <input type="password" name="password"
                            id="password" class="form-control"/>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label for="confirmPassword" class="col-3 col-form-label custom-label">Confirm Password</label>
+                <div class="col-7">
+                    <input type="confirmPassword" name="confirmPassword" id="confirmPassword" class="form-control"/>
+                </div>
+            </div>
+
             <div class="buttons">
-                <button type="submit" class="btn">Sign in</button>
+                <button type="submit" class="btn">Register</button>
             </div>
         </form>
+
         <div class="text-center mt-3">
-            <a th:href="signUp">New user? Sign up here</a>
+            <a th:href="login">Return to login</a>
         </div>
     </div>
+
+
 
 
 </div>
@@ -190,4 +229,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
-

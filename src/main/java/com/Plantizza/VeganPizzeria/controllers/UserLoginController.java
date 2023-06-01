@@ -31,6 +31,10 @@ public class UserLoginController {
         return "login";
     }
 
+    @GetMapping("signUp")
+    public String displaySignUp() {
+        return "signUp";
+    }
     @PostMapping("inputLoginDetails")
     public String inputLoginDetails(HttpServletRequest request) {
         String email = request.getParameter("email");
