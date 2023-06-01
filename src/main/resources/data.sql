@@ -35,18 +35,18 @@ INSERT INTO typeOfUser VALUES
 ('Admin');
 
 INSERT INTO login VALUES
-('judd@gmail.com', 'password', 'Customer'),
-('neil@btinternet.com','password','Customer'),
-('luca@gmail.com','password', 'Customer'),
-('mark@plusnet.com','password', 'Customer'),
-('jimmy@gmail.com','password', 'Customer'),
-('dom@gmail.com','password', 'Customer'),
-('yan@btinternet.com','password', 'Customer'),
-('marco@gmail.com', 'password', 'Customer'),
-('leo@plantizza.com', 'password', 'Employee'),
-('micky@plantizza.com', 'password', 'Employee'),
-('donna@vplantizza.com', 'password', 'Employee'),
-('raph@plantizza.com', 'password', 'Employee'),
+('judd@gmail.com', 'p0okl', 'Customer'),
+('neil@btinternet.com','p0okl','Customer'),
+('luca@gmail.com','p0okl', 'Customer'),
+('mark@plusnet.com','p0okl', 'Customer'),
+('jimmy@gmail.com','p0okl', 'Customer'),
+('dom@gmail.com','p0okl', 'Customer'),
+('yan@btinternet.com','p0okl', 'Customer'),
+('marco@gmail.com', 'p0okl', 'Customer'),
+('leo@plantizza.com', 'p0okl', 'Employee'),
+('micky@plantizza.com', 'p0okl', 'Employee'),
+('donna@vplantizza.com', 'p0okl', 'Employee'),
+('raph@plantizza.com', 'p0okl', 'Employee'),
 ('admin', 'admin', 'Admin');
 
 INSERT INTO employees VALUES
@@ -66,11 +66,11 @@ INSERT INTO customers VALUES
 (8,'Marco Fu', 'marco@gmail.com','9 Ally Pally Street', 'PO32 6JW', '07777222222');
 
 INSERT INTO orders VALUES
-(1, 2, '17:30:05', '2023-05-26', 6.99, 'Delivered'),
-(2, 3, '17:40:05', '2023-05-26', 15.98, 'Picked up'),
-(3, 5, '17:50:05', '2023-05-26', 24.97, 'Pick up'),
-(4, 7, '18:00:05', '2023-05-26', 13.98, 'Cooking'),
-(5, 8, '18:10:05', '2023-05-26', 17.98, 'Ordered');
+(1, 7, '13:30:09', '2023-06-01', 6.99, 'Picked up'),
+(2, 3, '13:48:05', '2023-06-01', 15.98, 'Cooking'),
+(3, 5, '13:50:05', '2023-06-01', 24.97, 'Cooking'),
+(4, 1, '14:05:05', '2023-06-01', 13.98, 'Ordered'),
+(5, 8, '14:08:05', '2023-06-01', 17.98, 'Ordered');
 
 INSERT INTO orderLines VALUES
 (1,1,'Plain',1,6.99),
