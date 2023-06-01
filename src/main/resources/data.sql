@@ -3,23 +3,23 @@ USE veganPizzeria;
 INSERT INTO pizzas VALUES
 ('Plain', 6.99,
 'A classic vegan delight with a crispy crust, flavourful tomato sauce, fresh herbs, and a touch of sea salt.',
-'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
+'https://img.delicious.com.au/qRrzAHSr/del/2019/03/marinara-pizza-102752-2.jpg'),
 
 ('BBQ Jackfruit', 8.99,
 'Tangy BBQ jackfruit on a crispy crust, topped with colourful bell peppers, red onions, and vegan cheese.',
-'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
+'https://pizzatoday.com/wp-content/uploads/2018/02/jackfruitbbqpizza.jpg'),
 
 ('Mushroom', 8.99,
 'Robust and earthy, this pizza features a blend of cremini, shiitake, and oyster mushrooms with vegan cheese and fresh thyme.',
-'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
+'http://bitly.ws/GzWk'),
 
 ('Roasted Veg', 8.99,
 'Bursting with flavours of roasted zucchini, bell peppers, eggplant, and cherry tomatoes, finished with herb-infused olive oil.',
-'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg'),
+'https://diabetes-resources-production.s3.eu-west-1.amazonaws.com/resources-s3/migration/recipes/Roasted-Vegetable-Pizza.jpg'),
 
 ('Olive & Sundried Tomato', 8.99,
 'A Mediterranean-inspired delight with Kalamata olives, sundried tomatoes, vegan feta cheese, and a drizzle of olive oil.',
-'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg');
+'https://realfood.tesco.com/media/images/RFO-Vegan-Pizza-1400X919-05ee14fe-5367-4e77-965a-b5b28dc32709-0-1400x919.jpg');
 
 INSERT INTO statusOfOrder VALUES
 ('Basket'),
