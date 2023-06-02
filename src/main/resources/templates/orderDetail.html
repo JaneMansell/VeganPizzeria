@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <!-- Required meta tags -->
@@ -6,48 +6,204 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-  <title>Order Details</title>
+  <title>Plantizza - Menu</title>
+  <style>
+    body {
+      background-color: #356036;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    body:before {
+      content: "";
+      background-image: url('/images/vegan-pizza.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      position: fixed;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    h1 {
+      color: #fff;
+      font-family: 'New Tegomin', serif; /* New Tegomin font */
+      font-size: 5rem;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    h2 {
+      color: #356036;
+      font-family: 'PT Sans Narrow', sans-serif;
+      font-size: 4rem;
+      margin-top: 0;
+      padding-bottom: 15px;
+      /* Custom styles for the subheading */
+      margin-bottom: 20px;
+    }
+
+    .centralBand {
+      background-color: rgba(255, 255, 255, 0.4);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      padding: 50px 0;
+      z-index: 1;
+    }
+
+    .contents {
+    background-color: transparent;
+      position: absolute;
+      top: 16%;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 65%;
+      padding: 0;
+      z-index: 2;
+    }
+
+
+    .buttons {
+      text-align: center;
+    }
+
+    .buttons {
+      text-align: center;
+    }
+
+    .buttons .btn {
+    padding: 6px 10px;
+    color: #fff;
+    background-color: rgba(53, 96, 54, 0.75);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Remove underline */
+  }
+
+    .buttons .btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #000;
+    }
+
+    input[type="text"],
+  select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+  }
+
+<!-- table stuff from https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l -->
+
+    .styled-table {
+    margin: 25px auto;
+    font-family: sans-serif;
+    width: 100%;
+  }
+
+    .styled-table thead tr {
+    background-color: rgba(53, 96, 54, 0.7);
+    color: #fff;
+    text-align: center;
+    font-family: 'New Tegomin', serif;
+    font-size: 1.35em;
+    width: 100%;
+  }
+    .styled-table th,
+    .styled-table td {
+    padding: 12px 0px;
+  }
+
+    .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    color: #000;
+    }
+
+    .styled-table tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #000;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍕</text></svg>">
 </head>
+
+<!--Main Body of Page -->
 <body>
-
-<!-- Main Body of Page -->
-<div class="container">
-  <div class="row m-4">
-    <div class="col text-center border border-dark">
-      <h1>Plantizza</h1>
-    </div>
+<header>
+  <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: absolute; top: 0; left: 0;">
+    <h1>Plantizza</h1>
   </div>
-  <div class="row m-4 border border-dark">
-    <div class="col text-center m-3">
-      <table class ="table table-striped">
-        <thead>
-        <tr>
-          <th>Order Number</th>
-          <th>Pizza</th>
-          <th>Quantity</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each = "orderLine : ${orderLines}">
-          <td th:text="${orderLine.orderId}">Order ID</td>
-          <td th:text="${orderLine.pizzaName}">Pizza Name</td>
-          <td th:text="${orderLine.quantity}">Quantity</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+</header>
 
-  </div>
+<div class="centralBand">
 </div>
+
+<div class="contents">
+  <!-- Put page contents here -->
+
+  <div class="col-11.5 text-center m-3">
+    <table class="styled-table w-100">
+      <thead>
+      <tr>
+        <th>Order Number</th>
+        <th>Pizza</th>
+        <th>Quantity</th>
+        <th></th> <!-- Empty column for the Confirm button -->
+      </tr>
+      </thead>
+      </thead>
+      <tbody>
+      <tr th:each = "orderLine : ${orderLines}">
+        <td th:text="${orderLine.orderId}">Order ID</td>
+        <td th:text="${orderLine.pizzaName}">Pizza Name</td>
+        <td th:text="${orderLine.quantity}">Quantity</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  </div>
+
+
 <!-- End main body -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
-</html>;
+</html>
