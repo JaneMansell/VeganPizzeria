@@ -37,6 +37,32 @@ public class OrderController {
         int customerId = Integer.parseInt(id);
         System.out.println("I am customer " + customerId);
         List<Order> orders = orderDao.getAllOrdersByCustomerIdByDate(customerId,today);
+        for (Order order: orders) {
+            switch (order.getOrderStatus()){
+                case "Ordered":
+                    // Message to say pizza is being prepared
+                    order.setOrderStatus("Your pizzas are being lovingly hand-prepared by our Sicilian chef");
+                    break;
+                case "Cooking":
+                    // Message to say pizza is being cooked
+                    order.setOrderStatus("Your pizzas are cooking at the moment");
+                    break;
+                case "Pick up":
+                    // A message that doesn't imply pizza is sat on the side getting cold
+                    order.setOrderStatus("Your pizzas are nearly ready and will be on their way shortly");
+                    break;
+                case "Picked Up":
+                    // A message to say the pizza its on its way
+                    order.setOrderStatus("Your pizzas are on their way to you");
+                    break;
+                case "Delivered":
+                    // A message to say the pizza has been delivered
+                    order.setOrderStatus("Your pizzas have been delivered");
+                    break;
+                default:
+                    // this must be an error but give customer friendly message
+            }
+        }
         model.addAttribute("orders", orders);
 
         return "customerTrackOrder";
