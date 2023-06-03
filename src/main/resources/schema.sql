@@ -14,7 +14,7 @@ userType VARCHAR(10) PRIMARY KEY
 CREATE TABLE login(
 emailAddress VARCHAR(50) PRIMARY KEY,
 password VARCHAR(50) NOT NULL,
-userType VARCHAR(20) NOT NULL,
+userType VARCHAR(10) NOT NULL,
 CONSTRAINT FOREIGN KEY fk_TypeOfUser_Login
 	(userType) REFERENCES typeOfUser (userType)
 );
@@ -36,7 +36,7 @@ customerId INT NOT NULL,
 orderPlacedTime TIME NOT NULL,
 orderDate DATE NOT NULL,
 total DECIMAL(6,2) NOT NULL,
-orderStatus VARCHAR(20) NOT NULL,
+orderStatus VARCHAR(10) NOT NULL,
 CONSTRAINT FOREIGN KEY fk_CustomersOrders
 	(customerId) REFERENCES customers (customerId),
 CONSTRAINT FOREIGN KEY fk_StatusOfOrderOrders
