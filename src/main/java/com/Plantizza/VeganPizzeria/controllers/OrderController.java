@@ -33,22 +33,18 @@ public class OrderController {
     @GetMapping("customerTrackOrder")
     public String displayStatusToCustomer(@RequestParam(name = "id") String id, Model model) {
 
-        //LocalDate today = LocalDate.now(); Add when there is an order for today
+        LocalDate today = LocalDate.now();
         int customerId = Integer.parseInt(id);
         System.out.println("I am customer " + customerId);
-        LocalDate today = LocalDate.parse("2023-06-02"); //Remove when in production
-
         List<Order> orders = orderDao.getAllOrdersByCustomerIdByDate(customerId,today);
         model.addAttribute("orders", orders);
-
 
         return "customerTrackOrder";
     }
 
     @GetMapping("cookTrackOrder")
     public String displayStatusToCook (Model model) {
-        //LocalDate today = LocalDate.now(); Add when there is an order for today
-        LocalDate today = LocalDate.parse("2023-06-02"); //Remove when in production
+        LocalDate today = LocalDate.now();
         List<Order> orders = orderDao.getAllOrdersByDateForCook(today);
         List<OrderLine> orderLines = orderLineDao.getAllOrderLines();
         List<String> availableStatusToCook = Stream.of("Ordered","Cooking", "Pick up")
