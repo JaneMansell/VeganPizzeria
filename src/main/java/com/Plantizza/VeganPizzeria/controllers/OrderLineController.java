@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -127,7 +129,16 @@ public class OrderLineController {
         System.out.println("My customerId is " + customerId);
         int orderId = Integer.parseInt(request.getParameter("submitOrdId"));
         System.out.println("My orderId is " + orderId);
-        BigDecimal orderTotal = orderDao.calculateOrderTotal(orderId);
+        //Get all the orderLines for the order and find the total
+        List<OrderLine> allLinesForOrder = orderLineDao.getOrderLinesByOrderId(orderId);
+        List<BigDecimal> bigDecimalList = new ArrayList<>();
+        for (OrderLine line : allLinesForOrder){
+            bigDecimalList.add(line.getLineCost());
+        }
+        BigDecimal orderTotal = bigDecimalList.stream()
+                .reduce(BigDecimal.ZERO, (p,q) -> p.add(q));
+
+        //Update the order 
         Order order = orderDao.getOrderById(orderId);
         order.setTotal(orderTotal);
         order.setOrderStatus("Ordered");
