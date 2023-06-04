@@ -154,39 +154,39 @@
     <!--Form to log in-->
     <div class="formBox">
         <h2>Sign up</h2>
-        <form align="center" action="registerNewDetails" method="POST">
+        <form align="center" action="registerNewCustomer" method="POST">
             <div class="form-group row">
                 <label for="name" class="col-3 col-form-label custom-label">Name</label>
                 <div class="col-7">
-                    <input type="name" name="name" id="name" class="form-control"/>
+                    <input type="name" name="name" id="name" class="form-control" required/>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="email" class="col-3 col-form-label custom-label">Email</label>
                 <div class="col-7">
-                    <input type="email" name="email" id="email" class="form-control"/>
+                    <input type="email" name="email" id="email" class="form-control required"/>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="phone" class="col-3 col-form-label custom-label">Phone</label>
                 <div class="col-7">
-                    <input type="phone" name="phone" id="phone" class="form-control"/>
+                    <input type="phone" name="phone" id="phone" class="form-control" required/>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="address" class="col-3 col-form-label custom-label">Address</label>
                 <div class="col-7">
-                    <input type="address" name="address" id="address" class="form-control"/>
+                    <input type="address" name="address" id="address" class="form-control" required/>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="postCode" class="col-3 col-form-label custom-label">Post Code</label>
                 <div class="col-7">
-                    <input type="postCode" name="postCode" id="postCode" class="form-control"/>
+                    <input type="postCode" name="postCode" id="postCode" class="form-control" required/>
                 </div>
             </div>
 
@@ -194,14 +194,15 @@
                 <label for="password" class="col-3 col-form-label custom-label">Password</label>
                 <div class="col-7">
                     <input type="password" name="password"
-                           id="password" class="form-control"/>
+                           id="password" class="form-control" required/>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="confirmPassword" class="col-3 col-form-label custom-label">Confirm Password</label>
                 <div class="col-7">
-                    <input type="confirmPassword" name="confirmPassword" id="confirmPassword" class="form-control"/>
+                    <input type="password" name="confirmPassword"
+                           id="confirmPassword" class="form-control" required/>
                 </div>
             </div>
 
@@ -215,14 +216,25 @@
         </div>
     </div>
 
-
-
-
 </div>
 
 <!-- End main body -->
 
-<!-- Optional JavaScript -->
+<!-- JavaScript - confirm password validation -->
+<script>
+    function validatePassword() {
+      var password = document.getElementById("confirmPassword").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (confirmPassword != password) {
+        alert("Passwords do not match");
+        return false;
+      }
+    }
+  </script>
+
+
+
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

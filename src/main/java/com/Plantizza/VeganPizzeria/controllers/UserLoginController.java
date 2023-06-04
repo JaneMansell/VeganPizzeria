@@ -65,5 +65,33 @@ public class UserLoginController {
         }
 
     }
+
+    @PostMapping("registerNewCustomer")
+    public void registerNewCustomer(HttpServletRequest request){
+        // grab data from form
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String postCode = request.getParameter("postCode");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+
+        // create and add userLogin object
+        UserLogin userLogin = new UserLogin();
+        userLogin.setUserType("Customer");
+        userLogin.setEmailAddress(email);
+        userLogin.setPassword(password);
+        userLogin = userLoginDao.adduserLogin(userLogin);
+
+        // create and add customer object
+        Customer customer = new Customer();
+        customer.setCustomerName(name);
+        customer.setCustomerEmailAddress(email);
+        customer.setCustomerPhone(phone);
+        customer.setCustomerFirstLineAddress(address);
+        customer.setCustomerPostCode(postCode);
+        customer = customerDao.addCustomer(customer);
+    }
 }
 
