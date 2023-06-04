@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,73 +38,108 @@ public class OrderLineController {
     @Autowired
     PizzaDao pizzaDao;
 
-    int customerId = 5;
+    @GetMapping("makeOrder")
+    public String makeOrder(@RequestParam(name = "id") String id, Model model){
+        int customerId = Integer.parseInt(id);
+        Order order = createBlankOrder(customerId);  // Create a new blank order
+        orderDao.addOrder(order); // add Order
+        return "redirect:/placeOrder?id=" +customerId + "&o="+order.getId();
+    }
 
-    @ModelAttribute("order")
-    public Order createOrder(){
-        Order order = orderDao.createBlankOrder(this.customerId);  // Create a new blank order
-        order = orderDao.addOrder(order); // add Order
+    //Helper method to create a blank order at start of ordering process
+    public Order createBlankOrder(int customerId) {
+        Order order = new Order();
+        order.setCustomerId(customerId);
+        order.setOrderPlacedTime(LocalTime.now());
+        order.setOrderDate(LocalDate.now());
+        order.setOrderStatus("Basket");
+        order.setTotal(new BigDecimal(0.00));
+
         return order;
     }
 
     @GetMapping("placeOrder")
-    public String startOrder(@RequestParam(name = "id") String id, Model model) {
+    public String startOrder(@RequestParam(name = "id") String id, @RequestParam(name = "o") String oId, Model model) {
         int customerId = Integer.parseInt(id);
+        int orderId = Integer.parseInt(oId);
         System.out.println("I am customer " + customerId);
-        Order order = orderDao.createBlankOrder(customerId);
+        Order order = orderDao.getOrderById(orderId);
+        System.out.println("I have retrieved the order");
 
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
+        System.out.println("I have the orderlines");
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
+        System.out.println("I have the pizzas");
 
-        model.addAttribute("orderLines", orderLines);
-        model.addAttribute("pizzas", pizzas);
-        return "placeOrder";
-    }
-
-    @GetMapping("ordering")
-    public String displayOrderLines(Model model, Integer orderId) {
-        List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(orderId);
-        List<Pizza> pizzas = pizzaDao.getAllPizzas();
-
+        model.addAttribute("order", order);
         model.addAttribute("orderLines", orderLines);
         model.addAttribute("pizzas", pizzas);
         return "placeOrder";
     }
 
     @PostMapping("/addOrderLine")
-    public String addOrderLine(@ModelAttribute("order") Order order, OrderLine orderLine, HttpServletRequest request) {
-        // Set the orderId for the OrderLine
-        orderLine.setOrderId(order.getId());
+    public String addOrderLine(HttpServletRequest request) {
+        OrderLine orderLine = new OrderLine();
 
-        // Retrieve other form parameters
+        //Retrieve form parameters
         String pizzaName = request.getParameter("pizzaName");
+        System.out.println("My pizza is " + pizzaName);
         int quantity = Integer.parseInt(request.getParameter("quantity"));
+        System.out.println("My quantity is " + quantity);
+        int customerId = Integer.parseInt(request.getParameter("id"));
+        System.out.println("My customerId is " + customerId);
+        int orderId = Integer.parseInt(request.getParameter("oId"));
+        System.out.println("My orderId is " + orderId);
 
         // Calculate cost of orderLine
         BigDecimal pizzaCost = pizzaDao.getPizzaPriceByName(pizzaName);
         BigDecimal lineCost = pizzaCost.multiply(BigDecimal.valueOf(quantity));
 
-        // Set the remaining properties of the OrderLine
+        // Set the properties of the OrderLine
+
+        orderLine.setOrderId(orderId);
         orderLine.setPizzaName(pizzaName);
         orderLine.setQuantity(quantity);
         orderLine.setLineCost(lineCost);
 
         // Add the OrderLine to the database
         orderLineDao.addOrderLine(orderLine);
+        System.out.println("I have added a line to the order");
 
-        // Redirect to the placeOrder page with the same orderId
-        return "redirect:/ordering?orderId=" + order.getId();
+        // Redirect to the placeOrder page with the same orderId and customerId
+        return "redirect:/placeOrder?id=" +customerId + "&o="+orderId;
     }
 
     @GetMapping("/deleteOrderLine")
-    public String deleteOrderLine(@RequestParam("id") Integer lineOrderId) {
+    public String deleteOrderLine(@RequestParam("id") String id,
+                                  @RequestParam("oId") String oId,
+                                  @RequestParam("lId") String lId) {
+        int customerId = Integer.parseInt(id);
+        int orderId = Integer.parseInt(oId);
+        int lineOrderId = Integer.parseInt(lId);
         orderLineDao.deleteOrderLine(lineOrderId);
-        return "redirect:/placeOrder";
+        return "redirect:/placeOrder?id=" +customerId + "&o="+orderId;
     }
 
     @PostMapping("/submitOrder")
-    public String submitOrder(@ModelAttribute("order") Order order, Model model){
-        BigDecimal orderTotal = orderDao.calculateOrderTotal(order.getId());
+    public String submitOrder(HttpServletRequest request){
+        System.out.println("Order submission has been requested");
+        //Retrieve form parameters
+        int customerId = Integer.parseInt(request.getParameter("submitCustId"));
+        System.out.println("My customerId is " + customerId);
+        int orderId = Integer.parseInt(request.getParameter("submitOrdId"));
+        System.out.println("My orderId is " + orderId);
+        //Get all the orderLines for the order and find the total
+        List<OrderLine> allLinesForOrder = orderLineDao.getOrderLinesByOrderId(orderId);
+        List<BigDecimal> bigDecimalList = new ArrayList<>();
+        for (OrderLine line : allLinesForOrder){
+            bigDecimalList.add(line.getLineCost());
+        }
+        BigDecimal orderTotal = bigDecimalList.stream()
+                .reduce(BigDecimal.ZERO, (p,q) -> p.add(q));
+
+        //Update the order 
+        Order order = orderDao.getOrderById(orderId);
         order.setTotal(orderTotal);
         order.setOrderStatus("Ordered");
         order.setOrderPlacedTime(LocalTime.now());
@@ -110,6 +147,6 @@ public class OrderLineController {
 
         orderDao.updateOrder(order);
 
-        return "redirect:/placeOrder";
+        return "redirect:/customerTrackOrder?id=" +customerId;
     }
 }

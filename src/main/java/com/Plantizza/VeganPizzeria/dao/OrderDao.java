@@ -12,9 +12,7 @@ public interface OrderDao {
     List<Order> getAllOrdersByDate(LocalDate date);
     List<Order> getAllOrdersByDateForCook(LocalDate date);
     List<Order> getAllOrdersByCustomerIdByDate(int cid, LocalDate date);
-    Order createBlankOrder(int customerId);
     Order addOrder(Order order);
     void updateOrder(Order order);
-    BigDecimal calculateOrderTotal(int id);
     void deleteOrderById(int id);
 }

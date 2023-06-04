@@ -349,6 +349,8 @@
                   <input type="number" name="quantity" id="quantity" class="form-control" min="1" />
                 </div>
               </div>
+              <input type = "hidden" name = "id" id = "id" th:value = "${order.customerId}"/>
+              <input type = "hidden" name = "oId" id = "oId" th:value = "${order.id}"/>
               <div class="buttons">
               <button type="submit" class="btn">Add To Order</button>
               </div>
@@ -375,47 +377,25 @@
             <td th:text="${orderLine.pizzaName}">Pizza</td>
             <td th:text='${orderLine.quantity}'>Quantity</td>
             <td th:text="'£' + ${orderLine.lineCost}">Price</td>
-            <td><a href="#" th:href="@{/deleteOrderLine(id=${orderLine.lineOrderId})}">Delete</a></td>
+            <td>Delete</td>
           </tr>
           </tbody>
         </table>
-      </div>
 
-      <div class="row m-4">
-        <div class="col text-center">
-          <form id="submitOrderForm" action="/submitOrder" method="POST">
-            <div class = "buttons">
-            <button id="submitOrderButton" type="submit" class="btn">Submit Order</button>
-            </div>
-            <span id="orderStatusText"></span>
-          </form>
+        <!-- Form to add order lines to Order -->
+        <form action ="/submitOrder" method = "POST">
+          <input type = "hidden" name = "submitCustId" id = "submitCustId" th:value = "${order.customerId}"/>
+          <input type = "hidden" name = "submitOrdId" id = "submitOrdId" th:value = "${order.id}"/>
+
+
+        <div class="buttons">
+          <button id = "submitOrderButton" type = "submit" class="btn">Submit Order</button>
         </div>
-      </div>
-    </div>
+        </form>
+
     </div>
 
   </div>
-
-  <script>
-    const submitOrderForm = document.getElementById('submitOrderForm');
-    const submitOrderButton = document.getElementById('submitOrderButton');
-    const orderStatusText = document.getElementById('orderStatusText');
-    const orderDetails = document.getElementById('orderDetails');
-
-    submitOrderForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
-
-        // Disable the submit button
-        submitOrderButton.disabled = true;
-
-        // Update the order status text
-        orderStatusText.textContent = 'Order Submitted';
-
-        // Show the order details
-        orderDetails.style.display = 'block';
-    });
-</script>
-
 
 </div>
 

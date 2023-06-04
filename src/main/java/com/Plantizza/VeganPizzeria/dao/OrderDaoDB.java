@@ -62,18 +62,6 @@ public class OrderDaoDB implements OrderDao {
     }
 
     @Override
-    public Order createBlankOrder(int customerId) {
-        Order order = new Order();
-        order.setCustomerId(customerId);
-        order.setOrderPlacedTime(LocalTime.now());
-        order.setOrderDate(LocalDate.now());
-        order.setOrderStatus("Basket");
-        order.setTotal(new BigDecimal(0.00));
-
-        return order;
-    }
-
-    @Override
     @Transactional
     public Order addOrder(Order order) {
         final String INSERT_ORDER ="INSERT INTO orders(" +
@@ -104,14 +92,6 @@ public class OrderDaoDB implements OrderDao {
                 order.getTotal(),
                 order.getOrderStatus(),
                 order.getId());
-    }
-
-    @Override
-    public BigDecimal calculateOrderTotal(int id) {
-        final String CALCULATE_ORDER_TOTAL = "SELECT SUM(lineCost) AS totalCost " +
-                "FROM orderLines " +
-                "WHERE orderId = ?";
-        return jdbc.queryForObject(CALCULATE_ORDER_TOTAL, new OrderMapper(), id).getTotal();
     }
 
     @Override
