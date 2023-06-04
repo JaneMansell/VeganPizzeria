@@ -32,7 +32,9 @@ public class UserLoginController {
     }
 
     @GetMapping("signUp")
-    public String displaySignUp() {
+    public String displaySignUp(Model model) {
+        List<UserLogin> allUsers = userLoginDao.getAlluserLogins();
+        model.addAttribute("allUsers", allUsers);
         return "signUp";
     }
     @PostMapping("inputLoginDetails")
