@@ -220,18 +220,22 @@
 
 <!-- End main body -->
 
-<!-- JavaScript - confirm password validation -->
+<!-- JavaScript - password validation -->
 <script>
-    function validatePassword() {
-      var password = document.getElementById("confirmPassword").value;
-      var confirmPassword = document.getElementById("confirmPassword").value;
+    var password = document.getElementById("password"),
+    confirmPassword = document.getElementById("confirmPassword");
 
-      if (confirmPassword != password) {
-        alert("Passwords do not match");
-        return false;
-      }
+    function validatePassword(){
+    if(password.value != confirmPassword.value) {
+    confirmPassword.setCustomValidity("Passwords Don't Match");
+    } else {
+    confirmPassword.setCustomValidity('');
     }
-  </script>
+    }
+
+    password.onchange = validatePassword;
+    confirmPassword.onkeyup = validatePassword;
+ </script>
 
 
 

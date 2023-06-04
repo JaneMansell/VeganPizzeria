@@ -69,7 +69,7 @@ public class UserLoginController {
     }
 
     @PostMapping("registerNewCustomer")
-    public void registerNewCustomer(HttpServletRequest request){
+    public void registerNewCustomer(HttpServletRequest request, Model model){
         // grab data from form
         String name = request.getParameter("name");
         String email = request.getParameter("email");
@@ -78,6 +78,14 @@ public class UserLoginController {
         String postCode = request.getParameter("postCode");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
+
+        /*// check if email already exists in database
+        List<UserLogin> allUsers = (List<UserLogin>) model.getAttribute("allUsers");
+        for (UserLogin user : allUsers) {
+            if (user.getEmailAddress().equals(email)) {
+                // make user have to use another email
+            }
+        }*/
 
         // create and add userLogin object
         UserLogin userLogin = new UserLogin();
