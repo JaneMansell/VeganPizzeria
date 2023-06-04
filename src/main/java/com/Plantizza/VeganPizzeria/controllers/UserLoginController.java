@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserLoginController {
@@ -34,7 +35,10 @@ public class UserLoginController {
     @GetMapping("signUp")
     public String displaySignUp(Model model) {
         List<UserLogin> allUsers = userLoginDao.getAlluserLogins();
-        model.addAttribute("allUsers", allUsers);
+        List<String> emailAddresses = allUsers.stream()
+                .map(UserLogin::getEmailAddress)
+                .collect(Collectors.toList());
+        model.addAttribute("emailAddresses", emailAddresses);
         return "signUp";
     }
 
@@ -75,14 +79,6 @@ public class UserLoginController {
         String postCode = request.getParameter("postCode");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
-
-        /*// check if email already exists in database
-        List<UserLogin> allUsers = (List<UserLogin>) model.getAttribute("allUsers");
-        for (UserLogin user : allUsers) {
-            if (user.getEmailAddress().equals(email)) {
-                // make user have to use another email
-            }
-        }*/
 
         // create and add userLogin object
         UserLogin userLogin = new UserLogin();

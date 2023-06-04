@@ -210,7 +210,6 @@
                 <button type="submit" class="btn">Register</button>
             </div>
         </form>
-
         <div class="text-center mt-3">
             <a th:href="login">Return to login</a>
         </div>
@@ -220,22 +219,46 @@
 
 <!-- End main body -->
 
-<!-- JavaScript - password validation -->
+<!-- JavaScript -->
 <script>
+    // *** password validation *** //
     var password = document.getElementById("password"),
     confirmPassword = document.getElementById("confirmPassword");
 
     function validatePassword(){
-    if(password.value != confirmPassword.value) {
-    confirmPassword.setCustomValidity("Passwords Don't Match");
-    } else {
-    confirmPassword.setCustomValidity('');
-    }
+        if (password.value != confirmPassword.value) {
+            confirmPassword.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirmPassword.setCustomValidity('');
+        }
     }
 
     password.onchange = validatePassword;
     confirmPassword.onkeyup = validatePassword;
- </script>
+
+
+
+    // *** Check if email exists *** //
+        var emailAddresses = /*[[${emailAddresses}]]*/ [];
+
+        function validateEmail() {
+            var emailInput = document.getElementById("email");
+            var email = emailInput.value;
+
+            // Check if the email exists in the list of emailAddresses
+            var exists = emailAddresses.includes(email);
+
+            if (exists) {
+                emailInput.setCustomValidity("Email already registered to an account");
+            } else {
+                emailInput.setCustomValidity("");
+            }
+        }
+
+        // Attach the validation function to the email input
+        var emailInput = document.getElementById("email");
+        emailInput.addEventListener("input", validateEmail);
+</script>
 
 
 
