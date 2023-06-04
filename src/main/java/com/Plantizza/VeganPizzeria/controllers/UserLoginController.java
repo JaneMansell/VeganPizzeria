@@ -37,30 +37,27 @@ public class UserLoginController {
         model.addAttribute("allUsers", allUsers);
         return "signUp";
     }
+
     @PostMapping("inputLoginDetails")
     public String inputLoginDetails(HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         UserLogin user = userLoginDao.getuserLoginByEmailAddress(email);
-        if (user == null){
+        if (user == null) {
             return "redirect:/login";
-        }
-        else if (!user.getPassword().equals(password)){
+        } else if (!user.getPassword().equals(password)) {
             return "redirect:/login";
-        }
-        else {
+        } else {
             String status = user.getUserType();
-            System.out.println("I am a "+ status);
-            if (status.equalsIgnoreCase("customer")){
+            System.out.println("I am a " + status);
+            if (status.equalsIgnoreCase("customer")) {
                 //this needs to take the customer ID with it.
                 Customer customer = customerDao.getCustomerByEmail(email);
                 int customerId = customer.getCustomerId();
-                return "redirect:/customerMenu/"+customerId;
-            }
-            else if (status.equalsIgnoreCase("Employee")){
+                return "redirect:/customerMenu/" + customerId;
+            } else if (status.equalsIgnoreCase("Employee")) {
                 return "redirect:/employeeMenu";
-            }
-            else {
+            } else {
                 //in the future this will be admin user
                 return "redirect:/login";
             }
@@ -69,7 +66,7 @@ public class UserLoginController {
     }
 
     @PostMapping("registerNewCustomer")
-    public void registerNewCustomer(HttpServletRequest request, Model model){
+    public String registerNewCustomer(HttpServletRequest request, Model model) {
         // grab data from form
         String name = request.getParameter("name");
         String email = request.getParameter("email");
@@ -102,6 +99,8 @@ public class UserLoginController {
         customer.setCustomerFirstLineAddress(address);
         customer.setCustomerPostCode(postCode);
         customer = customerDao.addCustomer(customer);
+
+        return "registerSuccess";
     }
 }
 
