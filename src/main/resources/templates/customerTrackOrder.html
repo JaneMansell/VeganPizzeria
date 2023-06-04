@@ -113,6 +113,10 @@
       background-color: rgba(255, 255, 255, 0.2);
     }
 
+    .tiny-writing {
+      font-size:60%;
+    }
+
 <!-- table stuff from https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l -->
 
     .styled-table {
@@ -142,6 +146,12 @@
     .styled-table tbody tr:nth-of-type(odd) {
     background-color: rgba(255, 255, 255, 0.5);
     color: #000;
+    }
+
+    .animal-img {
+    height: 200px;
+    width: auto;
+    margin: 50px;
     }
 
     footer {
@@ -185,6 +195,11 @@
         </tr>
         </tbody>
       </table>
+      <div>
+        <img class = animal-img src = "#" th:src = "${duckpic.url}" alt = "Picture of animal">
+      </div>
+      <div class = "tiny-writing" th:text="${duckpic.message}">Duckpic Message></div>
+
   </div>
 
 
