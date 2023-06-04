@@ -98,28 +98,36 @@
       z-index: 2;
     }
 
+    .flex-container {
+    display: flex;
+    }
+
+    .flex-child {
+    margin-top: 20px;
+    margin-right: 15px;
+    margin-left: 15px;
+    flex: 1;
+    border-radius: 30px;
+    }
+
+    .orderTable {
+    background-color: rgba(255, 255, 255, 0.8);
+    }
+
     .buttons {
       text-align: center;
-      margin-top: 30px;
     }
 
     .buttons .btn {
-    margin-top: 20px;
     font-size: 2rem;
     padding: 15px 50px;
     background-color: transparent;
     color: #fff !important; /* Set button text color to white */
-    border: 2px solid #fff;
     border-radius: 50px;
     transition: background-color 0.3s ease;
-    font-family: 'Open Sans', sans-serif; /* Open Sans font */
-    font-weight: bold; /* Set button text to bold */
+    font-weight: bold;
     text-decoration: none; /* Remove underline */
   }
-
-    .buttons .btn:first-child {
-      margin-right: 40px;
-    }
 
     .buttons .btn:hover {
       background-color: rgba(255, 255, 255, 0.2);
@@ -159,6 +167,7 @@
     font-weight: bold;
     font-size: 1.25rem;
     font-family: 'New Tegomin', serif;
+    text-align: center;
   }
 
   .card-title {
@@ -166,9 +175,11 @@
    padding-top: 0;
    font-size: 1.25rem;
    font-weight: bold;
+   text-align: center;
   }
 
   .card-text {
+  text-align: center;
   }
 
    footer {
@@ -177,6 +188,81 @@
     padding: 20px;
     text-align: center;
    }
+
+   .carousel-inner .card {
+  margin: auto;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  color: #ffffff;
+}
+
+<!-- table stuff from https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l -->
+
+    .styled-table {
+    margin: 25px auto;
+    font-family: sans-serif;
+    width: 100%;
+  }
+
+    .styled-table thead tr {
+    background-color: rgba(53, 96, 54, 0.8);
+    color: #fff;
+    text-align: center;
+    font-family: 'New Tegomin', serif;
+    font-size: 1.1em;
+    width: 100%;
+  }
+    .styled-table th,
+    .styled-table td {
+    padding: 12px 0px;
+  }
+
+    .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    color: #000;
+    }
+
+    .styled-table tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #000;
+    }
+
+    input[type="number, text"],
+    select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+  }
+
+  .buttons {
+      display: flex;
+    justify-content: center;
+    }
+
+    .buttons .btn {
+    font-size: 1em;
+    padding: 6px 10px;
+    color: #fff;
+    background-color: rgba(53, 96, 54, 0.7);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Remove underline */
+  }
+
+    .buttons .btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #000;
+    }
+
   </style>
   <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
@@ -202,85 +288,111 @@
   <!-- Put page contents here -->
 
   <div class="formBox">
-    <div class="col text-center">
+
+    <div class="flex-container LHS">
+      <div class="flex-child">
+    <div id="carouselContainer" style="display: flex; justify-content: center; margin-top: 10px;">
       <!--displays a card for each pizza on menu-->
       <form action="menu" method="GET">
-        <div class="row">
-          <div th:each="pizza : ${pizzas}" class="col-md-4" style="margin-bottom: 20px;">
-            <div class="card" style="height: 100%; width: 100%;">
-              <div class="card-header" th:text="${pizza.pizzaName}"></div>
-              <img class="card-img-top" th:src="${pizza.pizzaImgURL}" alt="pizza img" style="height: 200px; width: 100%;">
-              <div class="card-body">
-                <h5 class="card-title" th:text="${'£' + pizza.pizzaPrice}">Pizza Price</h5>
-                <p class="card-text" th:text="${pizza.pizzaDesc}">Pizza Description</p> <!-- will replace pizzaPrice with its description -->
-                <!-- button. can reinstate if needed e.g. to order <a href="#" class="btn btn-primary">Go somewhere</a>-->
+        <div id="pizzaCarousel" class="carousel slide" data-ride="carousel" style="width: 400px;">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#pizzaCarousel" th:each="pizza, status : ${pizzas}" th:data-slide-to="${status.index}" th:class="${status.index == 0} ? 'active'"></li>
+          </ol>
+
+          <!-- Slides -->
+          <div class="carousel-inner" style="display: flex; justify-content: center;">
+            <div th:each="pizza, status : ${pizzas}" th:class="${status.index == 0} ? 'carousel-item active' : 'carousel-item'">
+              <div class="card" style="height: 440px; width: 284px; display: flex; justify-content: center;">
+                <div class="card-header" th:text="${pizza.pizzaName}"></div>
+                <img class="card-img-top" th:src="${pizza.pizzaImgURL}" alt="pizza img" style="height: 200px; width: 282px;">
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${'£' + pizza.pizzaPrice}">Pizza Price</h5>
+                  <p class="card-text" th:text="${pizza.pizzaDesc}">Pizza Description</p>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Navigation -->
+          <a class="carousel-control-prev" href="#pizzaCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#pizzaCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
       </form>
     </div>
 
-  <!--Form to add a pizza to order-->
-  <div class="row m-4 border">
-    <div class="col-3 text-center m-3">
-      <span class="h3">Add Pizza</span>
-    </div>
-    <div class="col-7 text-center m-3">
-      <form action="/addOrderLine" method="POST">
-        <div class="form-group row">
-          <label for="pizza" class="col-3 col-form-label">Pizza</label>
-          <div class="col-9">
-            <select id="pizza" name="pizzaName" class="form-control">
-              <option th:each="pizza : ${pizzas}"
-                      th:value="${pizza.pizzaName}"
-                      th:text="${pizza.pizzaName + ' - £' + pizza.pizzaPrice}">
-                Pizza Name
-              </option>
-            </select>
+        <!--Form to add a pizza to order-->
+        <div class="row m-4 border">
+          <div class="col-11 text-center m-3">
+            <form action="/addOrderLine" method="POST">
+              <div class="form-group row">
+                <label for="pizza" class="col-3 col-form-label">Pizza</label>
+                <div class="col-9">
+                  <select id="pizza" name="pizzaName" class="form-control">
+                    <option th:each="pizza : ${pizzas}"
+                            th:value="${pizza.pizzaName}"
+                            th:text="${pizza.pizzaName + ' - £' + pizza.pizzaPrice}">
+                      Pizza Name
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="quantity" class="col-3 col-form-label">Quantity</label>
+                <div class="col-9">
+                  <input type="number" name="quantity" id="quantity" class="form-control" min="1" />
+                </div>
+              </div>
+              <div class="buttons">
+              <button type="submit" class="btn">Add To Order</button>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="form-group row">
-          <label for="quantity" class="col-3 col-form-label">Quantity</label>
-          <div class="col-9">
-            <input type="number" name="quantity" id="quantity" class="form-control" min="1" />
-          </div>
+
+    </div>
+
+    <div class="flex-child orderTable">
+      <!-- order summary -->
+      <div class="col text-center" style="margin-top: 30px">
+        <table class="styled-table w-100">
+          <thead>
+          <tr>
+            <th>Pizza</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th> </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="orderLine : ${orderLines}">
+            <td th:text="${orderLine.pizzaName}">Pizza</td>
+            <td th:text='${orderLine.quantity}'>Quantity</td>
+            <td th:text="'£' + ${orderLine.lineCost}">Price</td>
+            <td><a href="#" th:href="@{/deleteOrderLine(id=${orderLine.lineOrderId})}">Delete</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row m-4">
+        <div class="col text-center">
+          <form id="submitOrderForm" action="/submitOrder" method="POST">
+            <div class = "buttons">
+            <button id="submitOrderButton" type="submit" class="btn">Submit Order</button>
+            </div>
+            <span id="orderStatusText"></span>
+          </form>
         </div>
-        <button type="submit" class="btn btn-primary">Add To Order</button>
-      </form>
+      </div>
     </div>
-  </div>
-
-    <div class="col text-center m-3">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>Pizza</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th> </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="orderLine : ${orderLines}">
-          <td th:text="${orderLine.pizzaName}">Pizza</td>
-          <td th:text='${orderLine.quantity}'>Quantity</td>
-          <td th:text="'£' + ${orderLine.lineCost}">Price</td>
-          <td><a href="#" th:href="@{/deleteOrderLine(id=${orderLine.lineOrderId})}">Delete</a></td>
-        </tr>
-        </tbody>
-      </table>
     </div>
-
-
-  <div class="row m-4">
-    <div class="col text-center">
-      <form id="submitOrderForm" action="/submitOrder" method="POST">
-        <button id="submitOrderButton" type="submit" class="btn btn-primary">Submit Order</button>
-        <span id="orderStatusText"></span>
-      </form>
-    </div>
-  </div>
 
   </div>
 
