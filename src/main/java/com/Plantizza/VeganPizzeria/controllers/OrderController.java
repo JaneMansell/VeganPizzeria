@@ -49,9 +49,10 @@ public class OrderController {
         List<Order> orders = orderDao.getAllOrdersByCustomerIdByDate(customerId,today);
         for (Order order: orders) {
             switch (order.getOrderStatus()){
+
                 case "Basket":
-                    // Message to say pizza is being prepared
-                    order.setOrderStatus("Your pizzas are still in the basket. Please submit order");
+                    // Message to say order has not been submitted
+                    order.setOrderStatus("You have not clicked the submit order button");
                     break;
                 case "Ordered":
                     // Message to say pizza is being prepared
@@ -75,6 +76,7 @@ public class OrderController {
                     break;
                 default:
                     // this must be an error but give customer friendly message
+                    order.setOrderStatus("Oops! Something has gone wrong. Please try again.");
             }
         }
         model.addAttribute("orders", orders);
