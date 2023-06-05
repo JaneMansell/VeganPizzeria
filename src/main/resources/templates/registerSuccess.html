@@ -7,144 +7,20 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <!-- main design CSS -->
+    <link rel="stylesheet" th:href="@{/style.css}">
 
     <title>Plantizza - Sign Up</title>
-    <style>
-    body {
-      background-color: #356036;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
 
-    body:before {
-      content: "";
-      background-image: url('/images/vegan-pizza.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      opacity: 0.15;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      position: fixed;
-    }
-
-    header {
-      padding: 20px;
-      text-align: center;
-      z-index: 2;
-    }
-
-    h1 {
-      color: #fff;
-      font-family: 'New Tegomin', serif;
-      font-size: 5rem;
-      margin-top: 0;
-      padding-top: 0;
-    }
-
-    h2 {
-      color: #2C4E2C;
-      font-family: 'New Tegomin', serif;
-      font-size: 4rem;
-      margin-top: 0;
-      padding-bottom: 30px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    h3 {
-      color: #2C4E2C;
-      font-family: 'New Tegomin', serif;
-      font-size: 2rem;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .centralBand {
-      background-color: rgba(255, 255, 255, 0.4);
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70%;
-      padding: 50px 0;
-      z-index: 1;
-    }
-
-    .contents {
-    background-color: transparent;
-      position: absolute;
-      top: 16%;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 65%;
-      padding: 0;
-      z-index: 2;
-    }
-
-    .formBox {
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.7);
-      position: absolute;
-      top: 3%;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      height: 92%;
-      padding: 0;
-      z-index: 2;
-    }
-
-    .custom-label {
-        font-family: 'Arial';
-        text-align: right;
-    }
-
-    .buttons {
-      text-align: center;
-    }
-
-    .buttons .btn {
-    margin-top: 10px;
-    padding: 10px 100px;
-    color: #fff;
-    background-color: #356036;
-    border: 2px solid #fff;
-    border-radius: 30px;
-    transition: background-color 0.3s ease;
-    text-decoration: none; /* Remove underline */
-  }
-
-    .buttons .btn:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #000;
-    }
-
-    footer {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-
-
-  </style>
     <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍕</text></svg>">
+
+    <style>
+        .formBox {
+        height: 45%}
+    </style>
+
 </head>
 
 <!--Main Body of Page -->
