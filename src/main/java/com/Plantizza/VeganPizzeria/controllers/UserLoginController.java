@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserLoginController {
@@ -32,38 +33,70 @@ public class UserLoginController {
     }
 
     @GetMapping("signUp")
-    public String displaySignUp() {
+    public String displaySignUp(Model model) {
+        List<UserLogin> allUsers = userLoginDao.getAlluserLogins();
+        List<String> emailAddresses = allUsers.stream()
+                .map(UserLogin::getEmailAddress)
+                .collect(Collectors.toList());
+        model.addAttribute("emailAddresses", emailAddresses);
         return "signUp";
     }
+
     @PostMapping("inputLoginDetails")
     public String inputLoginDetails(HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         UserLogin user = userLoginDao.getuserLoginByEmailAddress(email);
-        if (user == null){
+        if (user == null) {
             return "redirect:/login";
-        }
-        else if (!user.getPassword().equals(password)){
+        } else if (!user.getPassword().equals(password)) {
             return "redirect:/login";
-        }
-        else {
+        } else {
             String status = user.getUserType();
-            System.out.println("I am a "+ status);
-            if (status.equalsIgnoreCase("customer")){
+            System.out.println("I am a " + status);
+            if (status.equalsIgnoreCase("customer")) {
                 //this needs to take the customer ID with it.
                 Customer customer = customerDao.getCustomerByEmail(email);
                 int customerId = customer.getCustomerId();
-                return "redirect:/customerMenu/"+customerId;
-            }
-            else if (status.equalsIgnoreCase("Employee")){
+                return "redirect:/customerMenu/" + customerId;
+            } else if (status.equalsIgnoreCase("Employee")) {
                 return "redirect:/employeeMenu";
-            }
-            else {
+            } else {
                 //in the future this will be admin user
                 return "redirect:/login";
             }
         }
 
+    }
+
+    @PostMapping("registerNewCustomer")
+    public String registerNewCustomer(HttpServletRequest request, Model model) {
+        // grab data from form
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String postCode = request.getParameter("postCode");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+
+        // create and add userLogin object
+        UserLogin userLogin = new UserLogin();
+        userLogin.setUserType("Customer");
+        userLogin.setEmailAddress(email);
+        userLogin.setPassword(password);
+        userLogin = userLoginDao.adduserLogin(userLogin);
+
+        // create and add customer object
+        Customer customer = new Customer();
+        customer.setCustomerName(name);
+        customer.setCustomerEmailAddress(email);
+        customer.setCustomerPhone(phone);
+        customer.setCustomerFirstLineAddress(address);
+        customer.setCustomerPostCode(postCode);
+        customer = customerDao.addCustomer(customer);
+
+        return "registerSuccess";
     }
 }
 

@@ -61,6 +61,15 @@
       text-align: center;
     }
 
+    h3 {
+      color: #2C4E2C;
+      font-family: 'New Tegomin', serif;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+
     .centralBand {
       background-color: rgba(255, 255, 255, 0.4);
       position: fixed;
@@ -154,62 +163,9 @@
     <!--Form to log in-->
     <div class="formBox">
         <h2>Sign up</h2>
-        <form align="center" action="registerNewCustomer" method="POST">
-            <div class="form-group row">
-                <label for="name" class="col-3 col-form-label custom-label">Name</label>
-                <div class="col-7">
-                    <input type="name" name="name" id="name" class="form-control" required maxlength="50"/>
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="email" class="col-3 col-form-label custom-label">Email</label>
-                <div class="col-7">
-                    <input type="email" name="email" id="email" class="form-control" required maxlength="50"/>
-                </div>
-            </div>
+        <h3>Registration successful!</h3>
 
-            <div class="form-group row">
-                <label for="address" class="col-3 col-form-label custom-label">Address</label>
-                <div class="col-7">
-                    <input type="address" name="address" id="address" class="form-control" required maxlength="100"/>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="postCode" class="col-3 col-form-label custom-label">Post Code</label>
-                <div class="col-7">
-                    <input type="postCode" name="postCode" id="postCode" class="form-control" required maxlength="10"/>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="phone" class="col-3 col-form-label custom-label">Phone</label>
-                <div class="col-7">
-                    <input type="phone" name="phone" id="phone" class="form-control" required maxlength="50"/>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="password" class="col-3 col-form-label custom-label">Password</label>
-                <div class="col-7">
-                    <input type="password" name="password"
-                           id="password" class="form-control" required maxlength="50"/>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="confirmPassword" class="col-3 col-form-label custom-label">Confirm Password</label>
-                <div class="col-7">
-                    <input type="password" name="confirmPassword"
-                           id="confirmPassword" class="form-control" required maxlength="50"/>
-                </div>
-            </div>
-
-            <div class="buttons">
-                <button type="submit" class="btn">Register</button>
-            </div>
-        </form>
         <div class="text-center mt-3">
             <a th:href="login">Return to login</a>
         </div>
@@ -219,46 +175,22 @@
 
 <!-- End main body -->
 
-<!-- JavaScript -->
+<!-- JavaScript - password validation -->
 <script>
-    // *** password validation *** //
     var password = document.getElementById("password"),
     confirmPassword = document.getElementById("confirmPassword");
 
     function validatePassword(){
-        if (password.value != confirmPassword.value) {
-            confirmPassword.setCustomValidity("Passwords Don't Match");
-        } else {
-            confirmPassword.setCustomValidity('');
-        }
+    if(password.value != confirmPassword.value) {
+    confirmPassword.setCustomValidity("Passwords Don't Match");
+    } else {
+    confirmPassword.setCustomValidity('');
+    }
     }
 
     password.onchange = validatePassword;
     confirmPassword.onkeyup = validatePassword;
-
-
-
-    // *** Check if email exists *** //
-        var emailAddresses = /*[[${emailAddresses}]]*/ [];
-
-        function validateEmail() {
-            var emailInput = document.getElementById("email");
-            var email = emailInput.value;
-
-            // Check if the email exists in the list of emailAddresses
-            var exists = emailAddresses.includes(email);
-
-            if (exists) {
-                emailInput.setCustomValidity("Email already registered to an account");
-            } else {
-                emailInput.setCustomValidity("");
-            }
-        }
-
-        // Attach the validation function to the email input
-        var emailInput = document.getElementById("email");
-        emailInput.addEventListener("input", validateEmail);
-</script>
+ </script>
 
 
 
