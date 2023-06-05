@@ -22,7 +22,7 @@ INSERT INTO pizzas VALUES
 'https://realfood.tesco.com/media/images/RFO-Vegan-Pizza-1400X919-05ee14fe-5367-4e77-965a-b5b28dc32709-0-1400x919.jpg'),
 
 ('Vegan Pepperoni', 9.99,
-'Plant-based pepperoni, melty vegan cheese, tangy tomato sauce, and aromatic herbs combine in a guilt-free twist on a classic favorite.',
+'Plant-based pepperoni, melty vegan cheese, tangy tomato sauce, and aromatic herbs combine in a guilt-free twist on a classic favourite.',
 'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg');
 
 
