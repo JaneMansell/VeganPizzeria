@@ -2,114 +2,114 @@
 
 /********* PAGE BACKGROUNDS *********/
 body {
-      background-color: #356036;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+    background-color: #356036;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     }
 
 body:before {
-      content: "";
-      background-image: url('/images/vegan-pizza.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      opacity: 0.15;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      position: fixed;
+    content: "";
+    background-image: url('/images/vegan-pizza.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: fixed;
     }
 
 /********* HEADER AND FOOTER *********/
 
 header {
-      padding: 20px;
-      text-align: center;
-      z-index: 2;
+    padding: 20px;
+    text-align: center;
+    z-index: 2;
     }
 
 footer {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      }
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    }
 
 /********* HEADINGS *********/
 
 h1 {
-      color: #fff;
-      font-family: 'New Tegomin', serif;
-      font-size: 5rem;
-      margin-top: 0;
-      padding-top: 0;
+    color: #fff;
+    font-family: 'New Tegomin', serif;
+    font-size: 5rem;
+    margin-top: 0;
+    padding-top: 0;
     }
 
 h2 {
-      color: #356036;
-      font-family: 'New Tegomin', serif;
-      font-size: 4rem;
-      margin-top: 0;
-      padding-bottom: 15px;
-      margin-bottom: 20px;
-      text-align: center;
+    color: #356036;
+    font-family: 'New Tegomin', serif;
+    font-size: 4rem;
+    margin-top: 0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    text-align: center;
     }
 
 h3 {
-      color: #2C4E2C;
-      font-family: 'New Tegomin', serif;
-      font-size: 2rem;
-      display: flex;
-      justify-content: center;
-      text-align: center;
+    color: #2C4E2C;
+    font-family: 'New Tegomin', serif;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     }
 
 /********* CONTAINERS FOR PAGE BODY *********/
 
 .centralBand {
-      background-color: rgba(255, 255, 255, 0.4);
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70%;
-      padding: 50px 0;
-      z-index: 1;
-      }
+    background-color: rgba(255, 255, 255, 0.4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    padding: 50px 0;
+    z-index: 1;
+    }
 
 .contents {
-      background-color: transparent;
-      position: absolute;
-      top: 13%;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 65%;
-      padding: 0;
-      z-index: 2;
+    background-color: transparent;
+    position: absolute;
+    top: 13%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65%;
+    padding: 0;
+    z-index: 2;
     }
 
 .formBox {
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.7);
-      position: relative;
-      top: 3%;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      padding: 0;
-      z-index: 2;
-       }
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: relative;
+    top: 3%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    padding: 0;
+    z-index: 2;
+    }
 
 .flex-container {
     display: flex;
@@ -148,31 +148,31 @@ h3 {
   }
 
 .card-title {
-   margin-top: 0;
-   padding-top: 0;
-   font-size: 1.25rem;
-   font-weight: bold;
-   text-align: center;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
   }
 
 .card-text {
-  text-align: center;
-  }
+    text-align: center;
+    }
 
 /********* CAROUSEL *********/
 
 .carousel-inner .card {
-  margin: auto;
+    margin: auto;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  filter: invert(100%);
+    filter: invert(100%);
 }
 
 .carousel-control-prev,
 .carousel-control-next {
-  color: #ffffff;
+    color: #fff;
 }
 
 /********* TABLES *********/
@@ -244,68 +244,65 @@ input[type="number, text"], select {
 /* buttons on home page*/
 
 .main-buttons {
-     text-align: center;
-     margin-top: 30px;
-     display: flex;
-     justify-content: center;
+    text-align: center;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
      }
 
 .main-buttons .btn {
-      margin-top: 20px;
-      font-size: 2rem;
-      padding: 15px 50px;
-      background-color: transparent;
-      color: #fff !important; /* Set button text color to white */
-      border: 2px solid #fff;
-      border-radius: 50px;
-      transition: background-color 0.3s ease;
-      font-family: 'New Tegomin', serif;
-      font-weight: bold;
-      text-decoration: none; /* Remove underline */
+    margin-top: 20px;
+    font-size: 2rem;
+    padding: 15px 50px;
+    background-color: transparent;
+    color: #fff !important; /* Set button text color to white */
+    border: 2px solid #fff;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    font-family: 'New Tegomin', serif;
+    font-weight: bold;
+    text-decoration: none; /* Remove underline */
     }
 
 .main-buttons .btn:first-child {
-      margin-right: 40px;
-      }
+    margin-right: 40px;
+    }
 
 .main-buttons .btn:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      }
+    background-color: rgba(255, 255, 255, 0.2);
+    }
 
 /* round buttons on customer/employee menus */
 
 .roundButtons {
-       display: flex;
-       justify-content: center;
-       }
+    display: flex;
+    justify-content: center;
+    }
 
 .roundButtons .btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 20px;
-        font-size: 2rem;
-        background-color: rgba(53,96,54,0.8);
-        color: #fff !important; /* Set button text color to white */
-        border: 2px solid #fff;
-        border-radius: 50%;
-        width: 250px;
-        height: 250px;
-        transition: background-color 0.3s ease;
-        font-family: 'New Tegomin', serif;
-        font-weight: bold; /* Set button text to bold */
-        text-decoration: none; /* Remove underline */
-      }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 2rem;
+    background-color: rgba(53,96,54,0.8);
+    color: #fff !important;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    transition: background-color 0.3s ease;
+    font-family: 'New Tegomin', serif;
+    font-weight: bold;
+    text-decoration: none; /* Remove underline */
+    }
 
 .roundButtons .btn:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: #000;
-        }
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #000;
+    }
 
 /* exit buttons (sign out/back) */
-
-.exitButtons {
-    }
 
 .exitButtons .btn {
     padding: 10px 20px;
