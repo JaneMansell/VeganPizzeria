@@ -59,7 +59,7 @@ public class OrderController {
                     break;
                 case "Pick up":
                     // A message that doesn't imply pizza is sat on the side getting cold
-                    order.setOrderStatus("Your pizzas are nearly ready and will be on their way shortly");
+                    order.setOrderStatus("Your pizzas are on their way");
                     break;
                 case "Picked Up":
                     // A message to say the pizza its on its way
