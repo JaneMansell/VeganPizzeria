@@ -207,9 +207,9 @@
         <form action="menu" method="GET">
           <div class="row">
             <div th:each="pizza : ${pizzas}" class="col-md-4" style="margin-bottom: 20px;">
-              <div class="card" style="height: 100%; width: 284px;">
+              <div class="card" style="height: 100%; width: 100%">
                 <div class="card-header" th:text="${pizza.pizzaName}"></div>
-                <img class="card-img-top" th:src="${pizza.pizzaImgURL}" alt="pizza img" style="height: 200px; width: 282px;">
+                <img class="card-img-top" th:src="${pizza.pizzaImgURL}" alt="pizza img" style="height: 200px; width: 100%;">
                 <div class="card-body">
                   <h5 class="card-title" th:text="${'£' + pizza.pizzaPrice}">Pizza Price</h5>
                   <p class="card-text" th:text="${pizza.pizzaDesc}">Pizza Description</p> <!-- will replace pizzaPrice with its description -->
