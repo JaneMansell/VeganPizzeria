@@ -346,7 +346,7 @@
               <div class="form-group row">
                 <label for="quantity" class="col-3 col-form-label">Quantity</label>
                 <div class="col-9">
-                  <input type="number" name="quantity" id="quantity" class="form-control" min="1" />
+                  <input type="number" name="quantity" id="quantity" class="form-control" min="1" placeholder="0"/>
                 </div>
               </div>
               <input type = "hidden" name = "id" id = "id" th:value = "${order.customerId}"/>
@@ -375,9 +375,9 @@
           <tbody>
           <tr th:each="orderLine : ${orderLines}">
             <td th:text="${orderLine.pizzaName}">Pizza</td>
-            <td th:text='${orderLine.quantity}'>Quantity</td>
+            <td th:text="${orderLine.quantity}">Quantity</td>
             <td th:text="'£' + ${orderLine.lineCost}">Price</td>
-            <td>Delete</td>
+            <td><a href = "#" th:href="@{/deleteOrderLine(lId=${orderLine.lineOrderId})}">Delete</a></td>
           </tr>
           </tbody>
         </table>
@@ -387,11 +387,11 @@
           <input type = "hidden" name = "submitCustId" id = "submitCustId" th:value = "${order.customerId}"/>
           <input type = "hidden" name = "submitOrdId" id = "submitOrdId" th:value = "${order.id}"/>
 
-
         <div class="buttons">
           <button id = "submitOrderButton" type = "submit" class="btn">Submit Order</button>
         </div>
         </form>
+        <!-- End of form to add orderLines to Order -->
 
     </div>
 

@@ -111,13 +111,15 @@ public class OrderLineController {
     }
 
     @GetMapping("/deleteOrderLine")
-    public String deleteOrderLine(@RequestParam("id") String id,
-                                  @RequestParam("oId") String oId,
-                                  @RequestParam("lId") String lId) {
-        int customerId = Integer.parseInt(id);
-        int orderId = Integer.parseInt(oId);
-        int lineOrderId = Integer.parseInt(lId);
-        orderLineDao.deleteOrderLine(lineOrderId);
+    public String deleteOrderLine(Integer lId) {
+
+        //Fetch lineOrder to retrieve orderId and CustomerId
+        OrderLine orderLine = orderLineDao.getOrderLineByLineOrderId(lId);
+        int orderId = orderLine.getOrderId();
+        Order order = orderDao.getOrderById(orderId);
+        int customerId = order.getCustomerId();
+        //Delete OrderLine
+        orderLineDao.deleteOrderLine(lId);
         return "redirect:/placeOrder?id=" +customerId + "&o="+orderId;
     }
 
@@ -146,6 +148,7 @@ public class OrderLineController {
         order.setOrderDate(LocalDate.now());
 
         orderDao.updateOrder(order);
+        System.out.println("Order has been placed");
 
         return "redirect:/customerTrackOrder?id=" +customerId;
     }
