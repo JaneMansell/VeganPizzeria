@@ -1,5 +1,6 @@
 /* styles.css */
 
+/********* PAGE BACKGROUNDS *********/
 body {
       background-color: #356036;
       font-family: Arial, sans-serif;
@@ -12,7 +13,7 @@ body {
       position: relative;
     }
 
-    body:before {
+body:before {
       content: "";
       background-image: url('/images/vegan-pizza.jpg');
       background-repeat: no-repeat;
@@ -27,20 +28,24 @@ body {
       position: fixed;
     }
 
-    header {
+/********* HEADER AND FOOTER *********/
+
+header {
       padding: 20px;
       text-align: center;
       z-index: 2;
     }
 
-    footer {
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-       }
+footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      }
 
-    h1 {
+/********* HEADINGS *********/
+
+h1 {
       color: #fff;
       font-family: 'New Tegomin', serif;
       font-size: 5rem;
@@ -48,7 +53,7 @@ body {
       padding-top: 0;
     }
 
-    h2 {
+h2 {
       color: #356036;
       font-family: 'New Tegomin', serif;
       font-size: 4rem;
@@ -58,16 +63,18 @@ body {
       text-align: center;
     }
 
-    h3 {
+h3 {
       color: #2C4E2C;
       font-family: 'New Tegomin', serif;
       font-size: 2rem;
       display: flex;
       justify-content: center;
       text-align: center;
-        }
+    }
 
-    .centralBand {
+/********* CONTAINERS FOR PAGE BODY *********/
+
+.centralBand {
       background-color: rgba(255, 255, 255, 0.4);
       position: fixed;
       top: 0;
@@ -77,10 +84,10 @@ body {
       width: 70%;
       padding: 50px 0;
       z-index: 1;
-    }
+      }
 
-    .contents {
-    background-color: transparent;
+.contents {
+      background-color: transparent;
       position: absolute;
       top: 13%;
       bottom: 0;
@@ -91,7 +98,7 @@ body {
       z-index: 2;
     }
 
-    .formBox {
+.formBox {
       border-radius: 10px;
       background-color: rgba(255, 255, 255, 0.7);
       position: relative;
@@ -102,13 +109,13 @@ body {
       width: 100%;
       padding: 0;
       z-index: 2;
-    }
+       }
 
-    .flex-container {
+.flex-container {
     display: flex;
     }
 
-    .flex-child {
+.flex-child {
     margin-top: 20px;
     margin-right: 15px;
     margin-left: 15px;
@@ -116,22 +123,23 @@ body {
     border-radius: 30px;
     }
 
-    .orderTable {
+.orderTable {
     background-color: rgba(255, 255, 255, 0.8);
     }
 
+/********* CARDS *********/
 
-  .card {
+.card {
     height: 100%;
     width: 100%;
   }
 
-  .card-img-top {
+.card-img-top {
     height: 200px;
     width: 100%;
   }
 
-  .card-header {
+.card-header {
     padding: 10px;
     font-weight: bold;
     font-size: 1.25rem;
@@ -139,7 +147,7 @@ body {
     text-align: center;
   }
 
-  .card-title {
+.card-title {
    margin-top: 0;
    padding-top: 0;
    font-size: 1.25rem;
@@ -147,11 +155,13 @@ body {
    text-align: center;
   }
 
-  .card-text {
+.card-text {
   text-align: center;
   }
 
-   .carousel-inner .card {
+/********* CAROUSEL *********/
+
+.carousel-inner .card {
   margin: auto;
 }
 
@@ -165,15 +175,17 @@ body {
   color: #ffffff;
 }
 
-/* table stuff from https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
+/********* TABLES *********/
 
-    .styled-table {
+/* table help from from https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
+
+.styled-table {
     margin: 25px auto;
     font-family: sans-serif;
     width: 100%;
   }
 
-    .styled-table thead tr {
+.styled-table thead tr {
     background-color: rgba(53, 96, 54, 0.8);
     color: #fff;
     text-align: center;
@@ -181,23 +193,25 @@ body {
     font-size: 1.1em;
     width: 100%;
   }
-    .styled-table th,
-    .styled-table td {
+
+.styled-table th,
+.styled-table td {
     padding: 12px 0px;
   }
 
-    .styled-table tbody tr:nth-of-type(even) {
+.styled-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
     color: #000;
     }
 
-    .styled-table tbody tr:nth-of-type(odd) {
+.styled-table tbody tr:nth-of-type(odd) {
     background-color: rgba(255, 255, 255, 0.5);
     color: #000;
     }
 
-    input[type="number, text"],
-    select {
+/********* INPUT BOXES *********/
+
+input[type="number, text"], select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -205,14 +219,14 @@ body {
     font-size: 15px;
   }
 
-/* buttons */
+/********* BUTTONS *********/
 
 .buttons {
     display: flex;
     justify-content: center;
     }
 
-    .buttons .btn {
+.buttons .btn {
     font-size: 1em;
     padding: 6px 10px;
     color: #fff;
@@ -222,21 +236,21 @@ body {
     text-decoration: none; /* Remove underline */
   }
 
-    .buttons .btn:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #000;
+.buttons .btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #000;
     }
 
-/* buttons on index page*/
+/* buttons on home page*/
 
-  .main-buttons {
-        text-align: center;
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-      }
+.main-buttons {
+     text-align: center;
+     margin-top: 30px;
+     display: flex;
+     justify-content: center;
+     }
 
-      .main-buttons .btn {
+.main-buttons .btn {
       margin-top: 20px;
       font-size: 2rem;
       padding: 15px 50px;
@@ -246,26 +260,26 @@ body {
       border-radius: 50px;
       transition: background-color 0.3s ease;
       font-family: 'New Tegomin', serif;
-      font-weight: bold; /* Set button text to bold */
+      font-weight: bold;
       text-decoration: none; /* Remove underline */
     }
 
-      .main-buttons .btn:first-child {
-        margin-right: 40px;
+.main-buttons .btn:first-child {
+      margin-right: 40px;
       }
 
-      .main-buttons .btn:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+.main-buttons .btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
       }
 
 /* round buttons on customer/employee menus */
 
-    .roundButtons {
-          display: flex;
-          justify-content: center;
-        }
+.roundButtons {
+       display: flex;
+       justify-content: center;
+       }
 
-        .roundButtons .btn {
+.roundButtons .btn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -281,20 +295,19 @@ body {
         font-family: 'New Tegomin', serif;
         font-weight: bold; /* Set button text to bold */
         text-decoration: none; /* Remove underline */
-
       }
 
-        .roundButtons .btn:hover {
-          background-color: rgba(255, 255, 255, 0.2);
-          color: #000;
+.roundButtons .btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #000;
         }
 
-/* exit buttons - sign out or go back*/
+/* exit buttons (sign out/back) */
 
-    .exitButtons {
-          }
+.exitButtons {
+    }
 
-    .exitButtons .btn {
+.exitButtons .btn {
     padding: 10px 20px;
     color: #fff;
     background-color: transparent;
@@ -303,14 +316,14 @@ body {
     transition: background-color 0.3s ease;
     text-decoration: none;
     font-family: 'New Tegomin', serif;
-  }
+   }
 
-  .exitButtons .btn:hover {
+.exitButtons .btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
     color: #000;
-  }
+   }
 
-    .exitButtons .btn:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #000;
+.exitButtons .btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #000;
     }
