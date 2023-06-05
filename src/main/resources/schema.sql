@@ -55,7 +55,7 @@ lineOrderId INT PRIMARY KEY AUTO_INCREMENT,
 orderId INT,
 pizzaName VARCHAR(50),
 quantity INT,
-lineCost DECIMAL(4,2),
+lineCost DECIMAL(8,2),
 CONSTRAINT FOREIGN KEY fk_OrdersOrderLines
 	(orderId) REFERENCES orders (orderId),
 CONSTRAINT FOREIGN KEY fk_PizzasOrderLines

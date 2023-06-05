@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class VeganPizzeriaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VeganPizzeriaApplication.class, args);
-	}
+		SpringApplication.run(VeganPizzeriaApplication.class, args);}
 
 }

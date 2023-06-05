@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,12 +35,7 @@ public class UserLoginController {
     }
 
     @GetMapping("signUp")
-    public String displaySignUp(Model model) {
-        List<UserLogin> allUsers = userLoginDao.getAlluserLogins();
-        List<String> emailAddresses = allUsers.stream()
-                .map(UserLogin::getEmailAddress)
-                .collect(Collectors.toList());
-        model.addAttribute("emailAddresses", emailAddresses);
+    public String displaySignUp() {
         return "signUp";
     }
 
@@ -97,6 +94,25 @@ public class UserLoginController {
         customer = customerDao.addCustomer(customer);
 
         return "registerSuccess";
+    }
+
+    @GetMapping("/checkEmail")
+    @ResponseBody
+    public String checkEmailExists(@RequestParam("email") String email) {
+        // Perform email existence check logic
+
+        List<UserLogin> allUsers = userLoginDao.getAlluserLogins();
+        List<String> emailAddresses = allUsers.stream()
+                .map(UserLogin::getEmailAddress)
+                .collect(Collectors.toList());
+
+        System.out.println(emailAddresses);
+
+        if (emailAddresses.contains(email)) {
+            return "exists";
+        } else {
+            return "notExists";
+        }
     }
 }
 
