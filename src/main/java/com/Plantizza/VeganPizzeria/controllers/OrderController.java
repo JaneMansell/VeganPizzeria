@@ -49,6 +49,10 @@ public class OrderController {
         List<Order> orders = orderDao.getAllOrdersByCustomerIdByDate(customerId,today);
         for (Order order: orders) {
             switch (order.getOrderStatus()){
+                case "Basket":
+                    // Message to say pizza is being prepared
+                    order.setOrderStatus("Your pizzas are still in the basket. Please submit order");
+                    break;
                 case "Ordered":
                     // Message to say pizza is being prepared
                     order.setOrderStatus("Your pizzas are being lovingly hand-prepared by our Sicilian chef");
