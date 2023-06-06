@@ -35,7 +35,7 @@ public class UserLoginController {
     }
 
     @GetMapping("signUp")
-    public String displaySignUp() {
+    public String displaySignUp(Model model) {
         return "signUp";
     }
 
@@ -68,9 +68,18 @@ public class UserLoginController {
 
     @PostMapping("registerNewCustomer")
     public String registerNewCustomer(HttpServletRequest request, Model model) {
-        // grab data from form
-        String name = request.getParameter("name");
+        // check if email already registered
         String email = request.getParameter("email");
+        List<UserLogin> allUsers = userLoginDao.getAlluserLogins();
+        List<String> emailAddresses = allUsers.stream()
+                .map(UserLogin::getEmailAddress)
+                .collect(Collectors.toList());
+        if (emailAddresses.contains(email)) { // refreshes page if duplicate email. In future, deal with this exception properly
+            return "redirect:/signUp";
+        }
+
+        // grab remaining data from form
+        String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         String postCode = request.getParameter("postCode");
@@ -99,14 +108,10 @@ public class UserLoginController {
     @GetMapping("/checkEmail")
     @ResponseBody
     public String checkEmailExists(@RequestParam("email") String email) {
-        // Perform email existence check logic
-
         List<UserLogin> allUsers = userLoginDao.getAlluserLogins();
         List<String> emailAddresses = allUsers.stream()
                 .map(UserLogin::getEmailAddress)
                 .collect(Collectors.toList());
-
-        System.out.println(emailAddresses);
 
         if (emailAddresses.contains(email)) {
             return "exists";
