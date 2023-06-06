@@ -108,10 +108,10 @@
 
 <!-- End main body -->
 
+<!-- JQuery imported -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<!-- JavaScript -->
 <script>
-    // *** password validation *** //
+    // ****** password validation ****** //
     var password = document.getElementById("password"),
     confirmPassword = document.getElementById("confirmPassword");
 
@@ -126,11 +126,11 @@
     password.onchange = validatePassword;
     confirmPassword.onkeyup = validatePassword;
 
-    // ** email validation ** //
 
-    $(document).ready(function() {
-        var emailInput = $("#email");
-        var email = emailInput.val();
+    // ***** check if email already in database ***** //
+
+    var emailInput = document.getElementById("email");
+    var email = emailInput.value;
 
         // Send Ajax request to check if email exists
         $.ajax({
@@ -139,21 +139,15 @@
             data: { email: email },
             success: function(response) {
                 if (response === "exists") {
-                    emailInput[0].setCustomValidity("Email already registered to an account");
+                    emailInput.setCustomValidity("Email already registered to an account");
                 } else {
-                    emailInput[0].setCustomValidity("");
+                    emailInput.setCustomValidity("");
                 }
             }
-        });
-    });
-});
-
-
+     });
 </script>
 
-
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!-- Popper.js, Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
