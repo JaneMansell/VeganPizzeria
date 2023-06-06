@@ -45,6 +45,14 @@ footer {
 
 /********* HEADINGS *********/
 
+a {
+    color: #356036;
+    }
+
+a:hover {
+    color: #356036
+    }
+
 h1 {
     color: #fff;
     font-family: 'New Tegomin', serif;
@@ -235,7 +243,7 @@ input[type="number, text"], select {
   }
 
 .buttons .btn:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(53, 96, 54, 0.4);
     color: #000;
     }
 
