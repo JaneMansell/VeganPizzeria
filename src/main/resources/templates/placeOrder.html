@@ -22,7 +22,7 @@
 <header>
   <div style="background-color: rgba(34, 34, 34, 0.5); padding: 5px; width: 100%; position: absolute; top: 0; left: 0;">
     <div class="exitButtons">
-      <a href="/" class="btn" style="position: absolute; left: 20px; top: 20px;">Back</a>
+      <a href="/" class="btn" style="position: absolute; left: 20px; top: 20px;">Sign out</a>
     </div>
     <h1>Plantizza</h1>
   </div>
@@ -128,6 +128,11 @@
             <td><a href = "#" th:href="@{/deleteOrderLine(lId=${orderLine.lineOrderId})}">Delete</a></td>
           </tr>
           </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="4" th:text="'Order Total: £' + ${order.total}">Order Total</td>
+          </tr>
+          </tfoot>
         </table>
 
         <!-- Form to add order lines to Order -->

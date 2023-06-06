@@ -1,6 +1,5 @@
 package com.Plantizza.VeganPizzeria.controllers;
 
-import com.Plantizza.VeganPizzeria.dao.CustomerDao;
 import com.Plantizza.VeganPizzeria.dao.OrderDao;
 import com.Plantizza.VeganPizzeria.dao.OrderLineDao;
 import com.Plantizza.VeganPizzeria.dao.PizzaDao;
@@ -34,11 +33,11 @@ public class OrderLineController {
     PizzaDao pizzaDao;
 
     @GetMapping("makeOrder")
-    public String makeOrder(@RequestParam(name = "id") String id, Model model){
+    public String makeOrder(@RequestParam(name = "id") String id, Model model) {
         int customerId = Integer.parseInt(id);
         Order order = createBlankOrder(customerId);  // Create a new blank order
         orderDao.addOrder(order); // add Order
-        return "redirect:/placeOrder?id=" +customerId + "&o="+order.getId();
+        return "redirect:/placeOrder?id=" + customerId + "&o=" + order.getId();
     }
 
     //Helper method to create a blank order at start of ordering process
@@ -61,7 +60,7 @@ public class OrderLineController {
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
 
-        // relevant order, orderLines, and pizzas made available to whole controller
+        // relevant order, orderLines, and pizzas made available to the whole controller
         model.addAttribute("order", order);
         model.addAttribute("orderLines", orderLines);
         model.addAttribute("pizzas", pizzas);
@@ -72,7 +71,7 @@ public class OrderLineController {
     public String addOrderLine(HttpServletRequest request) {
         OrderLine orderLine = new OrderLine();
 
-        //Retrieve form parameters
+        // Retrieve form parameters
         String pizzaName = request.getParameter("pizzaName");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         int customerId = Integer.parseInt(request.getParameter("id"));
@@ -91,40 +90,50 @@ public class OrderLineController {
         // Add the OrderLine to the database
         orderLineDao.addOrderLine(orderLine);
 
+        // Update the Order object
+        Order order = orderDao.getOrderById(orderId);
+        updateOrderTotal(order);
+        updateOrderStatus(order);
+
         // Redirect to the placeOrder page with the same orderId and customerId
-        return "redirect:/placeOrder?id=" +customerId + "&o="+orderId;
+        return "redirect:/placeOrder?id=" + customerId + "&o=" + orderId;
     }
 
     @GetMapping("/deleteOrderLine")
     public String deleteOrderLine(Integer lId) {
-
-        //Fetch lineOrder to retrieve orderId and CustomerId
+        // Fetch lineOrder to retrieve orderId and CustomerId
         OrderLine orderLine = orderLineDao.getOrderLineByLineOrderId(lId);
         int orderId = orderLine.getOrderId();
         Order order = orderDao.getOrderById(orderId);
         int customerId = order.getCustomerId();
 
-        //Delete OrderLine
+        // Delete OrderLine
         orderLineDao.deleteOrderLine(lId);
-        return "redirect:/placeOrder?id=" +customerId + "&o="+orderId;
+
+        // Update the Order object
+        updateOrderTotal(order);
+        updateOrderStatus(order);
+
+        return "redirect:/placeOrder?id=" + customerId + "&o=" + orderId;
     }
 
     @PostMapping("/submitOrder")
-    public String submitOrder(HttpServletRequest request){
+    public String submitOrder(HttpServletRequest request) {
 
-        //Retrieve form parameters
+        // Retrieve form parameters
         int customerId = Integer.parseInt(request.getParameter("submitCustId"));
         int orderId = Integer.parseInt(request.getParameter("submitOrdId"));
-        //Get all the orderLines for the order and find the total
+
+        // Get all the orderLines for the order and find the total
         List<OrderLine> allLinesForOrder = orderLineDao.getOrderLinesByOrderId(orderId);
         List<BigDecimal> bigDecimalList = new ArrayList<>();
-        for (OrderLine line : allLinesForOrder){
+        for (OrderLine line : allLinesForOrder) {
             bigDecimalList.add(line.getLineCost());
         }
         BigDecimal orderTotal = bigDecimalList.stream()
-                .reduce(BigDecimal.ZERO, (p,q) -> p.add(q));
+                .reduce(BigDecimal.ZERO, (p, q) -> p.add(q));
 
-        //Update the order 
+        // Update the Order object
         Order order = orderDao.getOrderById(orderId);
         order.setTotal(orderTotal);
         order.setOrderStatus("Ordered");
@@ -133,6 +142,28 @@ public class OrderLineController {
 
         orderDao.updateOrder(order);
 
-        return "redirect:/customerTrackOrder?id=" +customerId;
+        return "redirect:/customerTrackOrder?id=" + customerId;
+    }
+
+    // Helper method to update the total cost of the order
+    private void updateOrderTotal(Order order) {
+        List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
+        BigDecimal orderTotal = BigDecimal.ZERO;
+        for (OrderLine line : orderLines) {
+            orderTotal = orderTotal.add(line.getLineCost());
+        }
+        order.setTotal(orderTotal);
+        orderDao.updateOrder(order);
+    }
+
+    // Helper method to update the status of the order based on order lines
+    private void updateOrderStatus(Order order) {
+        List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
+        if (orderLines.isEmpty()) {
+            order.setOrderStatus("Basket");
+        } else {
+            order.setOrderStatus("Ordered");
+        }
+        orderDao.updateOrder(order);
     }
 }
