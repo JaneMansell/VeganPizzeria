@@ -147,6 +147,10 @@ The employee can also click on the "Details" for each order to display the pizza
 
 # Future Work
 
-Users will note that there is no payment functionality. In the future, we plan to integrate the PayPal API to support this.
-
-Also differentiate employees between admin user, cook, delivery person. 
+Given the time constraints on the project, we didn't manage to include all the functionality initially planned. We plan to include the following in the future:
+1. **Payment**: users will note that there is no payment functionality. We plan to integrate the [PayPal API](https://developer.paypal.com/docs/api/payments/v1/) to support this. 
+2. **Different employee types**:
+   - Admin - view statistics/analyses/order histories, create new employee accounts, delete orders/accounts
+   - Cook - specifically view pizza order details, change status to cooking & ready-for-pickup
+   - Delivery person - view customer **and** order details (name, address, phone number, pizzas, pizza quantities), update order to delivered
+3. **Mobile compatibility**: Adapt site to be ergonomic for mobile users too.
