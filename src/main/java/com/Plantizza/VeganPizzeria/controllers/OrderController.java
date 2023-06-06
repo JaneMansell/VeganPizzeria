@@ -7,11 +7,7 @@ import com.Plantizza.VeganPizzeria.entities.DuckPic;
 import com.Plantizza.VeganPizzeria.entities.Order;
 import com.Plantizza.VeganPizzeria.entities.OrderLine;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonObjectDeserializer;
-import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +41,6 @@ public class OrderController {
 
         LocalDate today = LocalDate.now();
         int customerId = Integer.parseInt(id);
-        System.out.println("I am customer " + customerId);
         List<Order> orders = orderDao.getAllOrdersByCustomerIdByDate(customerId,today);
         for (Order order: orders) {
             switch (order.getOrderStatus()){
@@ -125,8 +120,6 @@ public class OrderController {
 
     @PostMapping("editStatus")
     public String editStatus(String status, String id){
-        System.out.println("My order Id is "+id);
-        System.out.println("My status is "+status);
         int orderId = Integer.parseInt(id);
         Order order = orderDao.getOrderById(orderId);
         order.setOrderStatus(status);

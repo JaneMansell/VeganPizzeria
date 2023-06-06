@@ -26,9 +26,6 @@ public class UserLoginController {
     @Autowired
     CustomerDao customerDao;
 
-    @Autowired
-    EmployeeDao employeeDao;
-
     @GetMapping("login")
     public String displayLogin() {
         return "login";
@@ -50,7 +47,6 @@ public class UserLoginController {
             return "redirect:/login";
         } else {
             String status = user.getUserType();
-            System.out.println("I am a " + status);
             if (status.equalsIgnoreCase("customer")) {
                 //this needs to take the customer ID with it.
                 Customer customer = customerDao.getCustomerByEmail(email);
@@ -74,7 +70,7 @@ public class UserLoginController {
         List<String> emailAddresses = allUsers.stream()
                 .map(UserLogin::getEmailAddress)
                 .collect(Collectors.toList());
-        if (emailAddresses.contains(email)) { // refreshes page if duplicate email. In future, deal with this exception properly
+        if (emailAddresses.contains(email)) { // refreshes page if duplicate email. In the future, deal with this exception properly
             return "redirect:/signUp";
         }
 
@@ -105,6 +101,7 @@ public class UserLoginController {
         return "registerSuccess";
     }
 
+    // code for future email validation. not currently in use.
     @GetMapping("/checkEmail")
     @ResponseBody
     public String checkEmailExists(@RequestParam("email") String email) {
