@@ -82,7 +82,7 @@ Click on "Sign In" on the landing page and sign in with the following credential
 - Email: judd@gmail.com
 - Password: p0okl
 
-Other customer email addresses are available in the database. Note that incorrect credentials will cause the page to refresh. 
+Other customer email addresses are accessible in the `data.sql` file. Note that incorrect credentials will cause the page to refresh. 
 
 ![img_2.png](img_2.png)
 
@@ -121,10 +121,32 @@ duck picture/GIF, which will change each time you refresh the page, to keep you 
 
 ### Employee usage
 
+#### Signing in
+This is the same as signing in as a customer, but this time try these credentials:
+- Email: leo@plantizza.com
+- Password: p0okl
 
+Again, alternative employee credentials can be accessed in the `data.sql` file.
+
+#### Tracking orders
+
+At the moment, employees only have one option available to them on the menu - 'Track Orders'.
+
+![img_9.png](img_9.png)
+
+Clicking on the 'Track Orders' button will lead to this page containing the list of orders:
+
+![img_10.png](img_10.png)
+
+The status can be updated by toggling the drop-down menu and clicking 'Update' to change the status. 
+The status change is then fed back to the relevant customer.
+
+The employee can also click on the "Details" for each order to display the pizzas and quantities to be cooked:
+
+![img_11.png](img_11.png)
 
 # Future Work
 
 Users will note that there is no payment functionality. In the future, we plan to integrate the PayPal API to support this.
 
-Also differentiate employees between admin user, cook, delivery person.
+Also differentiate employees between admin user, cook, delivery person. 
