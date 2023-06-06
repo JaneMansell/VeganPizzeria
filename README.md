@@ -10,6 +10,9 @@ Collaborators: [Jane Mansell](https://github.com/JaneMansell) (JM) & [Victoria D
 - Usage
   - General
   - Customer usage
+    - Signing in/up
+    - Placing orders
+    - Tracking orders
   - Employee usage
 - Future Work
 
@@ -73,6 +76,48 @@ In order to access most of the programme, the user must be signed in. Currently,
 
 ### Customer usage
 
+#### Signing in/up
+
+Click on "Sign In" on the landing page and sign in with the following credentials:
+- Email: judd@gmail.com
+- Password: p0okl
+
+Other customer email addresses are available in the database. Note that incorrect credentials will cause the page to refresh. 
+
+![img_2.png](img_2.png)
+
+Alternatively, create a new user account by pressing "New user? Sign up here":
+
+![img_3.png](img_3.png)
+
+Successful registration will lead you to the following page:
+
+![img_4.png](img_4.png)
+
+You can then return to the login and sign in with your new account.
+Note that entering an email already registered to an account will cause the page to refresh.
+
+#### Placing orders
+Signing in will lead to the following page:
+
+![img_5.png](img_5.png)
+
+Click on 'Place Order' to start a new order. Pizzas can be added to the order by selecting a pizza type, entering a quantity, and clicking 'Add to Order'. 
+You can also toggle through the menu carousel to remind themselves of what is on the menu.
+
+![img_6.png](img_6.png)
+
+You can also delete pizzas from the order if you change your mind before submitting the order. 
+To submit the order, press 'Submit Order'.
+
+#### Tracking orders
+When the order is submitted, you will automatically be redirected to the tracking page, which can alternatively also be accessed by the 'Track My Order' button on
+the main Customer menu.
+
+![img_8.png](img_8.png)
+
+You will see your order number, and the order status, which will change as with employee updates. You will also see an adorable
+duck picture/GIF, which will change each time you refresh the page, to keep you entertained!
 
 ### Employee usage
 
