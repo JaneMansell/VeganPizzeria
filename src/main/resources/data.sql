@@ -25,8 +25,6 @@ INSERT INTO pizzas VALUES
 'Plant-based pepperoni, melty vegan cheese, tangy tomato sauce, and aromatic herbs combine in a guilt-free twist on a classic favourite.',
 'https://veganuary.com/wp-content/uploads/2022/06/vegan-pepperoni-pizza.jpg');
 
-
-
 INSERT INTO statusOfOrder VALUES
 ('Basket'),
 ('Ordered'),
