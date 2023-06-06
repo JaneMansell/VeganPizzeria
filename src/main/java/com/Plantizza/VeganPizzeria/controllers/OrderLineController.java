@@ -12,12 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -31,9 +29,6 @@ public class OrderLineController {
 
     @Autowired
     OrderDao orderDao;
-
-    @Autowired
-    CustomerDao customerDao;
 
     @Autowired
     PizzaDao pizzaDao;
@@ -59,18 +54,14 @@ public class OrderLineController {
     }
 
     @GetMapping("placeOrder")
-    public String startOrder(@RequestParam(name = "id") String id, @RequestParam(name = "o") String oId, Model model) {
-        int customerId = Integer.parseInt(id);
+    public String startOrder(@RequestParam(name = "o") String oId, Model model) {
         int orderId = Integer.parseInt(oId);
-        System.out.println("I am customer " + customerId);
         Order order = orderDao.getOrderById(orderId);
-        System.out.println("I have retrieved the order");
 
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
-        System.out.println("I have the orderlines");
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
-        System.out.println("I have the pizzas");
 
+        // relevant order, orderLines, and pizzas made available to whole controller
         model.addAttribute("order", order);
         model.addAttribute("orderLines", orderLines);
         model.addAttribute("pizzas", pizzas);
@@ -83,20 +74,15 @@ public class OrderLineController {
 
         //Retrieve form parameters
         String pizzaName = request.getParameter("pizzaName");
-        System.out.println("My pizza is " + pizzaName);
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        System.out.println("My quantity is " + quantity);
         int customerId = Integer.parseInt(request.getParameter("id"));
-        System.out.println("My customerId is " + customerId);
         int orderId = Integer.parseInt(request.getParameter("oId"));
-        System.out.println("My orderId is " + orderId);
 
         // Calculate cost of orderLine
         BigDecimal pizzaCost = pizzaDao.getPizzaPriceByName(pizzaName);
         BigDecimal lineCost = pizzaCost.multiply(BigDecimal.valueOf(quantity));
 
         // Set the properties of the OrderLine
-
         orderLine.setOrderId(orderId);
         orderLine.setPizzaName(pizzaName);
         orderLine.setQuantity(quantity);
@@ -104,7 +90,6 @@ public class OrderLineController {
 
         // Add the OrderLine to the database
         orderLineDao.addOrderLine(orderLine);
-        System.out.println("I have added a line to the order");
 
         // Redirect to the placeOrder page with the same orderId and customerId
         return "redirect:/placeOrder?id=" +customerId + "&o="+orderId;
@@ -118,6 +103,7 @@ public class OrderLineController {
         int orderId = orderLine.getOrderId();
         Order order = orderDao.getOrderById(orderId);
         int customerId = order.getCustomerId();
+
         //Delete OrderLine
         orderLineDao.deleteOrderLine(lId);
         return "redirect:/placeOrder?id=" +customerId + "&o="+orderId;
@@ -125,12 +111,10 @@ public class OrderLineController {
 
     @PostMapping("/submitOrder")
     public String submitOrder(HttpServletRequest request){
-        System.out.println("Order submission has been requested");
+
         //Retrieve form parameters
         int customerId = Integer.parseInt(request.getParameter("submitCustId"));
-        System.out.println("My customerId is " + customerId);
         int orderId = Integer.parseInt(request.getParameter("submitOrdId"));
-        System.out.println("My orderId is " + orderId);
         //Get all the orderLines for the order and find the total
         List<OrderLine> allLinesForOrder = orderLineDao.getOrderLinesByOrderId(orderId);
         List<BigDecimal> bigDecimalList = new ArrayList<>();
@@ -148,7 +132,6 @@ public class OrderLineController {
         order.setOrderDate(LocalDate.now());
 
         orderDao.updateOrder(order);
-        System.out.println("Order has been placed");
 
         return "redirect:/customerTrackOrder?id=" +customerId;
     }
