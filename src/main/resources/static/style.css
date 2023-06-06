@@ -328,12 +328,12 @@ input[type="number, text"], select {
 /********* DUCK IMAGE *********/
 
 .animal-img {
-height: 200px;
-width: auto;
-margin: 50px;
-}
+    height: 200px;
+    width: auto;
+    margin: 50px;
+    }
 
 .tiny-writing {
-  font-size:60%;
-}
+    font-size:60%;
+    }
     
