@@ -15,6 +15,7 @@ public class CustomerController {
 
     @GetMapping("customerMenu/{customerID}")
     public String displayCustomerMenu(@PathVariable("customerID") String customerId, Model model ) {
+        /* Method to display customer menu page */
         model.addAttribute("customerId", customerId);
         return "customerMenu";
     }

@@ -34,14 +34,21 @@ public class OrderLineController {
 
     @GetMapping("makeOrder")
     public String makeOrder(@RequestParam(name = "id") String id, Model model) {
+        /* Method to create a new order at the start of ordering process.
+        *  Method is called when Place Order button is pressed on customer
+        *  menu.
+        *  The id of the order is passed to the place order page and
+        *  that page is then displayed. */
         int customerId = Integer.parseInt(id);
         Order order = createBlankOrder(customerId);  // Create a new blank order
         orderDao.addOrder(order); // add Order
         return "redirect:/placeOrder?id=" + customerId + "&o=" + order.getId();
     }
 
-    //Helper method to create a blank order at start of ordering process
+
     public Order createBlankOrder(int customerId) {
+        /* Helper method to create a blank order at start of ordering
+         * process */
         Order order = new Order();
         order.setCustomerId(customerId);
         order.setOrderPlacedTime(LocalTime.now());
@@ -54,6 +61,7 @@ public class OrderLineController {
 
     @GetMapping("placeOrder")
     public String startOrder(@RequestParam(name = "o") String oId, Model model) {
+        /* Method that displays the placeOrder.html page. */
         int orderId = Integer.parseInt(oId);
         Order order = orderDao.getOrderById(orderId);
 
@@ -69,6 +77,8 @@ public class OrderLineController {
 
     @PostMapping("/addOrderLine")
     public String addOrderLine(HttpServletRequest request) {
+        /* Method that adds a line to the order and the orderLines database
+        *  when the Add Order button is clicked. */
         OrderLine orderLine = new OrderLine();
 
         // Retrieve form parameters
@@ -93,7 +103,6 @@ public class OrderLineController {
         // Update the Order object
         Order order = orderDao.getOrderById(orderId);
         updateOrderTotal(order);
-        updateOrderStatus(order);
 
         // Redirect to the placeOrder page with the same orderId and customerId
         return "redirect:/placeOrder?id=" + customerId + "&o=" + orderId;
@@ -101,6 +110,9 @@ public class OrderLineController {
 
     @GetMapping("/deleteOrderLine")
     public String deleteOrderLine(Integer lId) {
+        /* Method that deletes a line from the order on the placeOrder page
+         * and deletes the orderLine from the orderLines database */
+
         // Fetch lineOrder to retrieve orderId and CustomerId
         OrderLine orderLine = orderLineDao.getOrderLineByLineOrderId(lId);
         int orderId = orderLine.getOrderId();
@@ -112,7 +124,6 @@ public class OrderLineController {
 
         // Update the Order object
         updateOrderTotal(order);
-        updateOrderStatus(order);
 
         return "redirect:/placeOrder?id=" + customerId + "&o=" + orderId;
     }
@@ -120,33 +131,32 @@ public class OrderLineController {
     @PostMapping("/submitOrder")
     public String submitOrder(HttpServletRequest request) {
 
+        /* Method that update the order created in the makeOrder mapping
+        *  with the orderLines added to the order.
+        *  It is activated by the Submit Order button on the placeOrder.html page */
+
         // Retrieve form parameters
         int customerId = Integer.parseInt(request.getParameter("submitCustId"));
         int orderId = Integer.parseInt(request.getParameter("submitOrdId"));
 
-        // Get all the orderLines for the order and find the total
-        List<OrderLine> allLinesForOrder = orderLineDao.getOrderLinesByOrderId(orderId);
-        List<BigDecimal> bigDecimalList = new ArrayList<>();
-        for (OrderLine line : allLinesForOrder) {
-            bigDecimalList.add(line.getLineCost());
-        }
-        BigDecimal orderTotal = bigDecimalList.stream()
-                .reduce(BigDecimal.ZERO, (p, q) -> p.add(q));
-
-        // Update the Order object
+        // Get the order, retrieve the order lines and total them
+        // and update the order in the database.
         Order order = orderDao.getOrderById(orderId);
-        order.setTotal(orderTotal);
-        order.setOrderStatus("Ordered");
+        updateOrderTotal(order);
+
+        // Update the Order object with date and time
         order.setOrderPlacedTime(LocalTime.now());
         order.setOrderDate(LocalDate.now());
 
-        orderDao.updateOrder(order);
+        //Change the status to Ordered and update the database
+        updateOrderStatus(order);
 
         return "redirect:/customerTrackOrder?id=" + customerId;
     }
 
-    // Helper method to update the total cost of the order
+
     private void updateOrderTotal(Order order) {
+        // Helper method to update the total cost of the order
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
         BigDecimal orderTotal = BigDecimal.ZERO;
         for (OrderLine line : orderLines) {
@@ -156,8 +166,9 @@ public class OrderLineController {
         orderDao.updateOrder(order);
     }
 
-    // Helper method to update the status of the order based on order lines
+
     private void updateOrderStatus(Order order) {
+        // Helper method to update the status of the order based on order lines
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(order.getId());
         if (orderLines.isEmpty()) {
             order.setOrderStatus("Basket");
