@@ -17,7 +17,8 @@ Collaborators: [Jane Mansell](https://github.com/JaneMansell) (JM) & [Victoria D
 - Future Work
 
 ## Introduction
-This project is a pizza ordering programme for a vegan pizzeria that allows customers to place pizza orders, track the status of their orders, and additionally provide employees with the ability to manage order details and update order statuses. 
+This project is a pizza ordering programme for a vegan pizzeria that allows customers to place pizza orders and track the status of their orders. 
+Additionally, employees can access order details and manage order statuses.
 The programme also incorporates an API to showcase cute animal images, enhancing the overall user experience. 
 
 Objectives:
@@ -148,9 +149,16 @@ The employee can also click on the "Details" for each order to display the pizza
 # Future Work
 
 Given the time constraints on the project, we didn't manage to include all the functionality initially planned. We plan to include the following in the future:
-1. **Payment**: users will note that there is no payment functionality. We plan to integrate the [PayPal API](https://developer.paypal.com/docs/api/payments/v1/) to support this. 
+1. **Payment**: Users will note that there is no payment functionality. We plan to integrate the [PayPal API](https://developer.paypal.com/docs/api/payments/v1/) to support this. 
 2. **Different employee types**:
    - Admin - view statistics/analyses/order histories, create new employee accounts, delete orders/accounts
    - Cook - specifically view pizza order details, change status to cooking & ready-for-pickup
    - Delivery person - view customer **and** order details (name, address, phone number, pizzas, pizza quantities), update order to delivered
-3. **Mobile compatibility**: Adapt site to be ergonomic for mobile users too.
+3. **Mobile compatibility**: Adapt site to be suitable for mobile users too. This would be particularly useful
+4. **Improved exception handling**: 
+   - Login: Update to have "email/password incorrect" rather than refreshing page
+   - Sign up: Update to have "email already registered" rather than refreshing page
+   - Customised exceptions for application
+5. **Customisation of pizzas**: Include options for different sizes and toppings
+6. **Migrate to embedded database**: We plan to use the H2 Database Engine to eliminate the need to ...
+7. **Security**: Include Spring-Security dependency in order to...
