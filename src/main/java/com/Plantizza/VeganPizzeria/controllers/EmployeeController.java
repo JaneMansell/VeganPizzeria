@@ -13,6 +13,7 @@ public class EmployeeController {
 
     @GetMapping("employeeMenu")
     public String displayEmployeeMenu() {
+        /* Method to display employee menu page */
         return "employeeMenu";
     }
 }

@@ -28,24 +28,29 @@ public class UserLoginController {
 
     @GetMapping("login")
     public String displayLogin() {
+        /* Method to display login page */
         return "login";
     }
 
     @GetMapping("signUp")
     public String displaySignUp(Model model) {
+        /* Method to display sign up page */
         return "signUp";
     }
 
     @PostMapping("inputLoginDetails")
     public String inputLoginDetails(HttpServletRequest request) {
+        /* Form that collects login details */
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         UserLogin user = userLoginDao.getuserLoginByEmailAddress(email);
         if (user == null) {
+            // If the user is not in the database they are returned to the login page
             return "redirect:/login";
         } else if (!user.getPassword().equals(password)) {
+            // If the user has put in the wrong password they are returned to the database
             return "redirect:/login";
-        } else {
+        } else { // This is a valid user
             String status = user.getUserType();
             if (status.equalsIgnoreCase("customer")) {
                 //this needs to take the customer ID with it.
@@ -64,6 +69,8 @@ public class UserLoginController {
 
     @PostMapping("registerNewCustomer")
     public String registerNewCustomer(HttpServletRequest request, Model model) {
+        /* This method validates the new user and if validated adds them
+        *  to the database. */
         // check if email already registered
         String email = request.getParameter("email");
         List<UserLogin> allUsers = userLoginDao.getAlluserLogins();

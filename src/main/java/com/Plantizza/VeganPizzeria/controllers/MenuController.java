@@ -17,6 +17,7 @@ public class MenuController {
 
     @GetMapping("menu")
     public String displayMenu(Model model) {
+        /* Method to display menu of available pizzas */
         List<Pizza> pizzas = pizzaDao.getAllPizzas();
 
         model.addAttribute("pizzas", pizzas);

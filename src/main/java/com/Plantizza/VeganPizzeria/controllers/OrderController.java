@@ -38,7 +38,10 @@ public class OrderController {
 
     @GetMapping("customerTrackOrder")
     public String displayStatusToCustomer(@RequestParam(name = "id") String id, Model model) throws IOException, InterruptedException {
-
+        /* Method to display the status of the order to the customer
+        *  Includes customer friendly messages for each system status
+        *  Includes a connection to an API to show cute duck pics
+        *  each time the screen is refreshed. */
         LocalDate today = LocalDate.now();
         int customerId = Integer.parseInt(id);
         List<Order> orders = orderDao.getAllOrdersByCustomerIdByDate(customerId,today);
@@ -51,15 +54,15 @@ public class OrderController {
                     break;
                 case "Ordered":
                     // Message to say pizza is being prepared
-                    order.setOrderStatus("Your pizzas are being lovingly hand-prepared by our Sicilian chef");
+                    order.setOrderStatus("We've got your order");
                     break;
                 case "Cooking":
                     // Message to say pizza is being cooked
-                    order.setOrderStatus("Your pizzas are cooking at the moment");
+                    order.setOrderStatus("Your pizzas are being lovingly hand-prepared by our Sicilian chef");
                     break;
                 case "Pick up":
                     // A message that doesn't imply pizza is sat on the side getting cold
-                    order.setOrderStatus("Your pizzas are on their way");
+                    order.setOrderStatus("Your pizzas are nearly ready");
                     break;
                 case "Picked Up":
                     // A message to say the pizza its on its way
@@ -97,6 +100,9 @@ public class OrderController {
 
     @GetMapping("cookTrackOrder")
     public String displayStatusToCook (Model model) {
+        /* Method to display the status of the order to the cook
+         * Includes a link that gives the cook the pizzas ordered
+         * on each order so that they can prepare them. */
         LocalDate today = LocalDate.now();
         List<Order> orders = orderDao.getAllOrdersByDateForCook(today);
         List<OrderLine> orderLines = orderLineDao.getAllOrderLines();
@@ -111,6 +117,8 @@ public class OrderController {
 
     @GetMapping("orderDetail")
     public String orderDetail(Integer id, Model model) {
+        /* Method that provides the list of pizzas that are required to be cooked
+        *  to the cook. Called from cookTrackOrder.html*/
         Order order = orderDao.getOrderById(id);
         List<OrderLine> orderLines = orderLineDao.getOrderLinesByOrderId(id);
         model.addAttribute("order", order);
@@ -120,6 +128,8 @@ public class OrderController {
 
     @PostMapping("editStatus")
     public String editStatus(String status, String id){
+        /* Method that changes the status of the order.
+        *  Called from cookTrackOrder.html */
         int orderId = Integer.parseInt(id);
         Order order = orderDao.getOrderById(orderId);
         order.setOrderStatus(status);
