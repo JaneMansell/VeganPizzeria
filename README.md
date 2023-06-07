@@ -154,11 +154,11 @@ Given the time constraints on the project, we didn't manage to include all the f
    - Admin - view statistics/analyses/order histories, create new employee accounts, delete orders/accounts
    - Cook - specifically view pizza order details, change status to cooking & ready-for-pickup
    - Delivery person - view customer **and** order details (name, address, phone number, pizzas, pizza quantities), update order to delivered
-3. **Mobile compatibility**: Adapt site to be suitable for mobile users too. This would be particularly useful
+3. **Mobile compatibility**: Adapt site to be suitable for mobile users too. 
 4. **Improved exception handling**: 
    - Login: Update to have "email/password incorrect" rather than refreshing page
    - Sign up: Update to have "email already registered" rather than refreshing page
    - Customised exceptions for application
 5. **Customisation of pizzas**: Include options for different sizes and toppings
-6. **Migrate to embedded database**: We plan to use the H2 Database Engine to eliminate the need to ...
-7. **Security**: Include Spring-Security dependency in order to...
+6. **Migrate to embedded database**: We plan to use the H2 Database Engine to eliminate the need for 
+7. **Security**: Include Spring-Security dependency in order to stop access to site through URLs without permission.
