@@ -67,11 +67,11 @@ The programme should now be ready to run. Locate the `VeganPizzeriaApplication` 
 
 Now navigate to http://localhost:8080/ on your browser. You should now see the homepage:
 
-![img.png](img.png)
+![Landing](images/LandingPage.png)
 
 Click on "View Menu" to access the menu. You should see a page that looks like this:
 
-![img_1.png](img_1.png)
+![Menu](images/MenuPage.png)
 
 In order to access most of the programme, the user must be signed in. Currently, there are two types of user: customer and employee, so we will go through the different type of usage for both in the following sections.
 
@@ -85,15 +85,15 @@ Click on "Sign In" on the landing page and sign in with the following credential
 
 Other customer email addresses are accessible in the `data.sql` file. Note that incorrect credentials will cause the page to refresh. 
 
-![img_2.png](img_2.png)
+![Login](images/LoginPage.png)
 
 Alternatively, create a new user account by pressing "New user? Sign up here":
 
-![img_3.png](img_3.png)
+![Sign Up](images/SignUpPage.png)
 
 Successful registration will lead you to the following page:
 
-![img_4.png](img_4.png)
+![Registration Success](images/RegistrationSuccess.png)
 
 You can then return to the login and sign in with your new account.
 Note that entering an email already registered to an account will cause the page to refresh.
@@ -101,12 +101,12 @@ Note that entering an email already registered to an account will cause the page
 #### Placing orders
 Signing in will lead to the following page:
 
-![img_5.png](img_5.png)
+![Customer Menu](images/CustomerMenu.png)
 
 Click on 'Place Order' to start a new order. Pizzas can be added to the order by selecting a pizza type, entering a quantity, and clicking 'Add to Order'. 
 You can also toggle through the menu carousel to remind themselves of what is on the menu.
 
-![img_6.png](img_6.png)
+![Place Order](images/PlaceOrderPage.png)
 
 You can also delete pizzas from the order if you change your mind before submitting the order. 
 To submit the order, press 'Submit Order'.
@@ -115,7 +115,7 @@ To submit the order, press 'Submit Order'.
 When the order is submitted, you will automatically be redirected to the tracking page, which can alternatively also be accessed by the 'Track My Order' button on
 the main Customer menu.
 
-![img_8.png](img_8.png)
+![Customer Track Order](images/CustomerTrackOrder.png)
 
 You will see your order number, and the order status, which will change as with employee updates. You will also see an adorable
 duck picture/GIF, which will change each time you refresh the page, to keep you entertained!
@@ -133,18 +133,18 @@ Again, alternative employee credentials can be accessed in the `data.sql` file.
 
 At the moment, employees only have one option available to them on the menu - 'Track Orders'.
 
-![img_9.png](img_9.png)
+![Employee Menu](images/EmployeeMenu.png)
 
 Clicking on the 'Track Orders' button will lead to this page containing the list of orders:
 
-![img_10.png](img_10.png)
+![Employee Track Order](images/EmployeeTrackOrder.png)
 
 The status can be updated by toggling the drop-down menu and clicking 'Update' to change the status. 
 The status change is then fed back to the relevant customer.
 
 The employee can also click on the "Details" for each order to display the pizzas and quantities to be cooked:
 
-![img_11.png](img_11.png)
+![Order Details](images/OrderDetails.png)
 
 # Future Work
 
