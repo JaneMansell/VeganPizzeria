@@ -160,5 +160,5 @@ Given the time constraints on the project, we didn't manage to include all the f
    - Sign up: Update to have "email already registered" rather than refreshing page
    - Customised exceptions for application
 5. **Customisation of pizzas**: Include options for different sizes and toppings
-6. **Migrate to embedded database**: We plan to use the H2 Database Engine to eliminate the need for 
+6. **Migrate to embedded database**: We plan to use the H2 Database Engine.
 7. **Security**: Include Spring-Security dependency in order to stop access to site through URLs without permission.
